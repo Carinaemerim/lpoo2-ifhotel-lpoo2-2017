@@ -3,13 +3,10 @@ package br.edu.ifrs.canoas.jee.webapp.model.dao;
 import java.util.List;
 
 import br.edu.ifrs.canoas.jee.webapp.model.entity.PessoaFisica;
-import br.edu.ifrs.canoas.jee.webapp.util.EntityManagerUtil;
 
 public class PessoaFisicaDAO extends BaseDAO<PessoaFisica, Long> {
 	public PessoaFisica buscaPorDocumento(String documento){
 		List<PessoaFisica> pfs;
-		
-		em = EntityManagerUtil.getEM();
 		
 		if(documento.length() == 11){
 			pfs = em.createQuery(
