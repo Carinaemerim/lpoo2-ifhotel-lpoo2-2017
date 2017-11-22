@@ -1,0 +1,18 @@
+package br.edu.ifrs.canoas.jee.webapp.model.dao;
+
+import java.util.List;
+
+import br.edu.ifrs.canoas.jee.webapp.model.entity.Pessoa;
+import br.edu.ifrs.canoas.jee.webapp.util.EntityManagerUtil;
+
+public class PessoaDAO extends BaseDAO<Pessoa, Long> {
+	public List<Pessoa> listaTodasPessoas(){
+		em = EntityManagerUtil.getEM();
+		List<Pessoa> pessoas = em.createQuery(
+				"SELECT p FROM Pessoa p", Pessoa.class
+				).getResultList();
+		em.close();
+		
+		return pessoas;
+	}
+}
