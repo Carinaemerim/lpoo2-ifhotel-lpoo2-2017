@@ -15,7 +15,9 @@ import br.edu.ifrs.canoas.jee.webapp.model.entity.BaseEntity;
 
 @Stateless
 public abstract class BaseDAO<T extends BaseEntity<ID>, ID> implements Serializable{
-	
+		
+	private static final long serialVersionUID = 4489705146664275732L;
+
 	@Inject
     protected EntityManager em;
 	

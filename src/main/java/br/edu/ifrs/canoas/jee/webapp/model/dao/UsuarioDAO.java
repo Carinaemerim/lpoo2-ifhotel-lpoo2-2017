@@ -23,7 +23,6 @@ public class UsuarioDAO extends BaseDAO<Usuario, Long> {
 				.setParameter("email", email).getResultList();
 	}
 
-	@SuppressWarnings("unchecked")
 	public List<Usuario> busca(Usuario usuario) {
 
 		if (usuario == null)
