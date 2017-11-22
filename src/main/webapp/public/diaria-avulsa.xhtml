@@ -102,14 +102,17 @@
 						
 						<p:dataTable var="_usr" value="#{gerenciarUsuarioMB.usuarios}" id="tb-usuarios"
 							rendered="#{not empty gerenciarUsuarioMB.usuarios}">
-							<p:column headerText="Nome">
+							<p:column headerText="#{messages['diaria.table.rooms']}">
 								<h:outputText value="#{_usr.nome}" />
 							</p:column>
-							<p:column headerText="Sobrenome">
+							<p:column headerText="#{messages['diaria.table.cpf']}">
 								<h:outputText value="#{_usr.sobrenome}" />
 							</p:column>
-							<p:column headerText="Email">
+							<p:column headerText="#{messages['diaria.table.entrydate']}">
 								<h:outputText value="#{_usr.email}" />
+							</p:column>
+							<p:column headerText="#{messages['diaria.table.nbrdays']}">
+								<h:outputText value="#{_usr.senha}" />
 							</p:column>
 
 							<p:column headerText="Ações">

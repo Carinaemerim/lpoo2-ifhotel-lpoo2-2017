@@ -103,17 +103,17 @@
 						
 						<p:dataTable var="_usr" value="#{gerenciarUsuarioMB.usuarios}" id="tb-usuarios"
 							rendered="#{not empty gerenciarUsuarioMB.usuarios}">
-							<p:column headerText="Nome">
+							<p:column headerText="#{messages['user.table.name']}">
 								<h:outputText value="#{_usr.nome}" />
 							</p:column>
-							<p:column headerText="Sobrenome">
+							<p:column headerText="#{messages['user.table.lastname']}">
 								<h:outputText value="#{_usr.sobrenome}" />
 							</p:column>
-							<p:column headerText="Email">
+							<p:column headerText="#{messages['user.table.email']}">
 								<h:outputText value="#{_usr.email}" />
 							</p:column>
 
-							<p:column headerText="Ações">
+							<p:column headerText="#{messages['table.action']}">
 								<!-- EDITA -->
 								<h:commandButton value="#{messages['edit']}" immediate="true" styleClass="btn btn-default"
 									action="#{gerenciarUsuarioMB.edita(_usr)}" update="form-usuario" >
