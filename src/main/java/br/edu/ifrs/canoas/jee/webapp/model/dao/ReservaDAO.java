@@ -17,7 +17,7 @@ public class ReservaDAO extends BaseDAO<Reserva, Long>{
 				"SELECT reserva FROM Reserva reserva WHERE reserva.data = :data", Reserva.class
 				).setParameter("data", data)
 				.getResultList();
-		em.close();
+
 		return query;
 	}
 }

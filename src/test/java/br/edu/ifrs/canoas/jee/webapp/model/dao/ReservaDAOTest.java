@@ -1,6 +1,9 @@
 package br.edu.ifrs.canoas.jee.webapp.model.dao;
 
-import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.*;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
 import javax.inject.Inject;
 
@@ -19,7 +22,7 @@ import br.edu.ifrs.canoas.jee.webapp.model.entity.Reserva;
 public class ReservaDAOTest{
 
 		@Inject
-		ReservaDAO reservaDAO;
+		ReservaDAO rDAO;
 		
 		@Deployment
 	    public static Archive<?> createTestArchive() {
@@ -35,10 +38,27 @@ public class ReservaDAOTest{
 		public void testa_a_persistencia_da_reserva_em_branco () {	
 			Reserva reserva = new Reserva();
 			reserva.setValor(198.90);
-			reservaDAO.insere(reserva);
+			rDAO.insere(reserva);
 			assertNotNull(reserva.getId());
 		
 		}
 		
+		@Test
+		public void busca_por_data() throws ParseException{
+			
+			Reserva r1 = new Reserva();
+			SimpleDateFormat dt = new SimpleDateFormat( "dd/MM/yyyy" );
+			r1.setData(dt.parse("20/12/2017"));
+			rDAO.insere(r1);
+			
+			assertNotNull(rDAO.buscaPorData(dt.parse("20/12/2017")));
+			
+		}
+		
+		@Test
+		public void busca_por_data_vazia(){
+			
+			assertTrue(rDAO.buscaPorData(null).isEmpty());
+		}
 		
 }
