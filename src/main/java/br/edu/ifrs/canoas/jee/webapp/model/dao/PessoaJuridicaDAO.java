@@ -2,15 +2,23 @@ package br.edu.ifrs.canoas.jee.webapp.model.dao;
 
 import java.util.List;
 
+import javax.ejb.Stateless;
+
 import br.edu.ifrs.canoas.jee.webapp.model.entity.PessoaJuridica;
 
+@Stateless
 public class PessoaJuridicaDAO extends BaseDAO<PessoaJuridica, Long> {
 	public PessoaJuridica buscaPorCnpj(String cnpj){
+		
+		if(cnpj == null){
+			return null;
+		}
+		
 		List<PessoaJuridica> pjs = em.createQuery(
 				"SELECT pj FROM PessoaJuridica pj WHERE pj.cnpj = :cnpj", PessoaJuridica.class
 				).setParameter("cnpj", cnpj)
 				.getResultList();
-		em.close();
+		
 		
 		return (pjs.size() == 0) ? null : pjs.get(0);
 	}

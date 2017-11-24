@@ -14,6 +14,10 @@ public class PessoaFisicaDAO extends BaseDAO<PessoaFisica, Long> {
 	public PessoaFisica buscaPorDocumento(String documento){
 		List<PessoaFisica> pfs;
 		
+		if(documento == null){
+			return null;
+		}
+		
 		if(documento.length() == 11){
 			pfs = em.createQuery(
 					"SELECT pf FROM PessoaFisica pf WHERE pf.cpf = :cpf", PessoaFisica.class
@@ -25,9 +29,7 @@ public class PessoaFisicaDAO extends BaseDAO<PessoaFisica, Long> {
 					).setParameter("rg", documento)
 					.getResultList();
 		}
-		
-		em.close();
-		
+			
 		return (pfs.size() == 0) ? null : pfs.get(0);
 	}
 }
