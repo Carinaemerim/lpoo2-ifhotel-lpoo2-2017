@@ -25,45 +25,48 @@
       <!-- /.search form -->
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu" data-widget="tree">
-        <li class="header">CLIENTE</li>
+        <li class="header"><h:outputText value="#{messages['menu.div.client']}" /></li>
         <li>
           <a href="/webapp/public/#">
-            <i class="fa fa-male"></i> <span>Pessoa Física</span>
+            <i class="fa fa-male"></i> 
+            <h:outputText value="#{messages['menu.fisica']}" />
             <span class="pull-right-container"></span>
           </a>
         </li>
         <li>
           <a href="/webapp/public/#">
             <i class="fa fa-legal"></i>
-            <span>Pessoa Jurídica</span>
+            <h:outputText value="#{messages['menu.juridica']}" />
             <span class="pull-right-container"></span>
           </a>
         </li>
-        <li class="header">DIÁRIA</li>
+        <li class="header"><h:outputText value="#{messages['menu.div.diaria']}" /></li>
         <li>
           <a href="/webapp/public/diaria-avulsa.jsf">
-            <i class="fa fa-calendar-plus-o"></i> <span>Diária</span>
+            <i class="fa fa-calendar-plus-o"></i> 
+            <h:outputText value="#{messages['menu.diaria']}" />
             <span class="pull-right-container"></span>
           </a>
         </li>
         <li>
           <a href="/webapp/public/#">
             <i class="fa fa-calendar-check-o"></i>
-            <span>Reserva</span>
+            <h:outputText value="#{messages['menu.reservation']}" />
             <span class="pull-right-container"></span>
           </a>
         </li>
-		<li class="header">ADMINISTRAÇÃO</li>
+		<li class="header"><h:outputText value="#{messages['menu.div.adm']}" /></li>
 		<li>
           <a href="/webapp/public/usuario.jsf">
             <i class="fa fa-users"></i>
-            <span>Usuários</span>
+            <h:outputText value="#{messages['menu.users']}" />
             <span class="pull-right-container"></span>
           </a>
         </li>
         <li>
           <a href="/webapp/public/#">
-            <i class="fa fa-bed"></i> <span>Quartos</span>
+            <i class="fa fa-bed"></i> 
+            <h:outputText value="#{messages['menu.rooms']}" />
             <span class="pull-right-container"></span>
           </a>
         </li>
