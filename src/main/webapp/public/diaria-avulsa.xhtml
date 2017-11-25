@@ -52,37 +52,43 @@
 					<div class="box-body" id="form-usuario">
 						
 						<h:inputHidden value="#{gerenciarUsuarioMB.usuario.id}" id="hiddenId" />
-	
-						<p:outputLabel for="tipoCliente" value="#{messages['diaria.form.tipo.label']}" />
-						<!-- ADICIONAR value="#{mb.attribute}" ABAIXO -->
-						<p:selectOneMenu id="tipoCliente" style="width:150px" required="true">
-							<!-- <p:ajax listener="#{}" update="" /> -->
-			                <f:selectItem itemLabel="#{messages['diaria.form.tipo.hint']}" itemValue="" noSelectionOption="true" />
-			                <f:selectItem value="#{messages['diaria.form.pf']}" />
-			                <f:selectItem value="#{messages['diaria.form.pj']}" />
-			            </p:selectOneMenu>
+						<div class="form-group">
+							<p:outputLabel for="tipoCliente" value="#{messages['diaria.form.tipo.label']}" />
+							<p:selectOneMenu id="tipoCliente" required="true" style="width: 100%">
+				                <f:selectItem itemLabel="#{messages['diaria.form.tipo.hint']}" itemValue="" noSelectionOption="true" />
+				                <f:selectItem itemLabel="#{messages['diaria.form.pf']}" itemValue="#{messages['diaria.form.pf']}"/>
+				                <f:selectItem itemLabel="#{messages['diaria.form.pj']}" itemValue="#{messages['diaria.form.pj']}"/>
+				            </p:selectOneMenu>
+			            </div>
 
 						<div class="form-group">
-							<p:outputLabel for="sobrenome"
-								value="#{messages['user.lastname']}" />
-							<p:inputText id="sobrenome" styleClass="form-control"
-								value="#{gerenciarUsuarioMB.usuario.sobrenome}" required="true" />
-							<!-- <p:message for="sobrenome" errorClass="invalid" /> -->
+							<p:outputLabel for="cnpj" value="#{messages['diaria.form.cnpj.label']}" />
+							<p:selectOneMenu id="cnpj" required="true" style="width: 100%">
+				                <f:selectItem itemLabel="#{messages['diaria.form.cnpj.hint']}" itemValue="" noSelectionOption="true" />
+				                
+				            </p:selectOneMenu>
 						</div>
 
 						<div class="form-group">
-							<p:outputLabel for="email" value="#{messages['user.email']}" />
-							<p:inputText id="email" styleClass="form-control"
-								value="#{gerenciarUsuarioMB.usuario.email}" required="true" />
-							<!-- <p:message for="email" errorClass="invalid" /> -->
+							<p:outputLabel for="cpf" value="#{messages['diaria.form.cpf.label']}" />
+							<p:selectOneMenu id="cpf" required="true" style="width: 100%">
+				                <f:selectItem itemLabel="#{messages['diaria.form.cpf.hint']}" itemValue="" noSelectionOption="true" />
+				                
+				            </p:selectOneMenu>
 						</div>
 
 						<div class="form-group">
-							<p:outputLabel for="senha" value="#{messages['user.password']}" />
-							<p:password id="senha" styleClass="form-control"
-								value="#{gerenciarUsuarioMB.usuario.senha}" required="true">
-							</p:password>
-							<!-- <p:message for="senha" errorClass="invalid" /> -->
+							<p:outputLabel for="quarto" value="#{messages['diaria.form.quarto.label']}" />
+							<p:selectOneMenu id="quarto" required="true" style="width: 100%">
+				                <f:selectItem itemLabel="#{messages['diaria.form.quarto.hint']}" itemValue="" noSelectionOption="true" />
+				                
+				            </p:selectOneMenu>
+						</div>
+						
+						<div class="form-group">
+							<p:outputLabel for="qtd" value="#{messages['diaria.form.qtd.label']}" />
+							<p:inputText id="qtd" styleClass="form-control" required="true" />
+							<!-- <p:message for="nome" /> -->
 						</div>
 
 						<p:commandButton value="#{messages['clean']}" 
