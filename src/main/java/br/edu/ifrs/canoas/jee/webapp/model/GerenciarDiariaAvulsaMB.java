@@ -20,7 +20,7 @@ public class GerenciarDiariaAvulsaMB {
     private GerenciarDiariaAvulsaService gerenciarDiariaAvulsaService;
 	
 	@Inject
-	private GerenciarQuartoService gerenciarQuartoservice;
+	private GerenciarQuartoService gerenciarQuartoService;
 	
 	@Inject
 	private DiariaAvulsa diariaAvulsa;
@@ -28,6 +28,9 @@ public class GerenciarDiariaAvulsaMB {
 	private List<DiariaAvulsa> diariasAvulsas;
 	
 	private List<Quarto> quartos;
+	
+	private String tipo;
+	private boolean rendered = true;
 	
 	public String salva() {
 		gerenciarDiariaAvulsaService.salvaDiaria(diariaAvulsa);
@@ -38,8 +41,7 @@ public class GerenciarDiariaAvulsaMB {
 	@PostConstruct
     public void init() {
 		diariasAvulsas = gerenciarDiariaAvulsaService.busca();	
-		quartos = gerenciarQuartoservice.buscaNumero(null);
-		quartos = gerenciarQuartoservice.buscaTipo(null);
+		quartos = gerenciarQuartoService.buscaNumero(null);
     }
 	
 	
@@ -76,9 +78,8 @@ public class GerenciarDiariaAvulsaMB {
 		this.quartos = quartos;
 	}
 	
-	public boolean selectListener(){
-		
-		return true;
+	public void selectListener(){
+		setRendered(getTipo().contains("PJ"));
 	}
 	
 	public String limpa() {
@@ -86,4 +87,19 @@ public class GerenciarDiariaAvulsaMB {
 		return "/public/diaria-avulsa.jsf?facesRedirect=true";
 	}
 
+	public String getTipo(){
+		return tipo;
+	}
+	
+	public void setTipo(String tipo){
+		this.tipo = tipo;
+	}
+
+	public boolean isRendered() {
+		return rendered;
+	}
+
+	public void setRendered(boolean rendered) {
+		this.rendered = rendered;
+	}
 }

@@ -14,7 +14,6 @@ public class QuartoDAO extends BaseDAO<Quarto, Long> {
 				"SELECT quarto FROM Quarto quarto WHERE quarto.numero = :numero", Quarto.class
 				).setParameter("numero", numero)
 				.getResultList();
-
 		return query;
 	}
 	

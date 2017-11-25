@@ -3,15 +3,15 @@ package br.edu.ifrs.canoas.jee.webapp.service;
 import java.util.List;
 import java.util.logging.Logger;
 
-import org.jboss.arquillian.core.api.annotation.Inject;
+import javax.ejb.Stateless;
+import javax.inject.Inject;
 
 import br.edu.ifrs.canoas.jee.webapp.model.TipoDeQuarto;
 import br.edu.ifrs.canoas.jee.webapp.model.dao.QuartoDAO;
 import br.edu.ifrs.canoas.jee.webapp.model.entity.Quarto;
-import br.edu.ifrs.canoas.jee.webapp.model.entity.Usuario;
 
+@Stateless
 public class GerenciarQuartoService {
-
 	@Inject
 	private QuartoDAO quartoDAO;
 	
