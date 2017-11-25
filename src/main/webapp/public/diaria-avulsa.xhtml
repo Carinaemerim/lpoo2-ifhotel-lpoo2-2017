@@ -58,16 +58,17 @@
 				                <f:selectItem itemLabel="#{messages['diaria.form.tipo.hint']}" itemValue="" noSelectionOption="true" />
 				                <f:selectItem itemLabel="#{messages['diaria.form.pf']}" itemValue="#{messages['diaria.form.pf']}"/>
 				                <f:selectItem itemLabel="#{messages['diaria.form.pj']}" itemValue="#{messages['diaria.form.pj']}"/>
+				                <p:ajax update="cnpj-wrapper" />
 				            </p:selectOneMenu>
 			            </div>
 
-						<div class="form-group">
+						<h:panelGroup layout="block" class="form-group" id="cnpj-wrapper" rendered="true">
 							<p:outputLabel for="cnpj" value="#{messages['diaria.form.cnpj.label']}" />
 							<p:selectOneMenu id="cnpj" required="true" style="width: 100%">
 				                <f:selectItem itemLabel="#{messages['diaria.form.cnpj.hint']}" itemValue="" noSelectionOption="true" />
 				                
 				            </p:selectOneMenu>
-						</div>
+						</h:panelGroup>
 
 						<div class="form-group">
 							<p:outputLabel for="cpf" value="#{messages['diaria.form.cpf.label']}" />
