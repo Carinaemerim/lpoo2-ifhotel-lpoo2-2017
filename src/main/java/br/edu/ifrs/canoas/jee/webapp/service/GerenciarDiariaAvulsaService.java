@@ -21,7 +21,7 @@ public class GerenciarDiariaAvulsaService {
 	
 	public boolean salvaDiaria(DiariaAvulsa d){
 		log.info("Salvando diária em "+d.getData());
-		
+	
 		if(d.getId() != null){
 			Mensagens.define(FacesMessage.SEVERITY_INFO, "Diaria.atualizada.sucesso", d.getData());
 			diariaDAO.atualiza(d);
