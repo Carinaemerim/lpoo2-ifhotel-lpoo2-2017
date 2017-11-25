@@ -53,12 +53,14 @@
 						
 						<h:inputHidden value="#{gerenciarUsuarioMB.usuario.id}" id="hiddenId" />
 	
-						<div class="form-group">
-							<p:outputLabel for="nome" value="#{messages['user.name']}" />
-							<p:inputText id="nome" styleClass="form-control"
-								value="#{gerenciarUsuarioMB.usuario.nome}" required="true" />
-							<!-- <p:message for="nome" /> -->
-						</div>
+						<p:outputLabel for="tipoCliente" value="#{messages['diaria.form.tipo.label']}" />
+						<!-- ADICIONAR value="#{mb.attribute}" ABAIXO -->
+						<p:selectOneMenu id="tipoCliente" style="width:150px" required="true">
+							<!-- <p:ajax listener="#{}" update="" /> -->
+			                <f:selectItem itemLabel="#{messages['diaria.form.tipo.hint']}" itemValue="" noSelectionOption="true" />
+			                <f:selectItem value="#{messages['diaria.form.pf']}" />
+			                <f:selectItem value="#{messages['diaria.form.pj']}" />
+			            </p:selectOneMenu>
 
 						<div class="form-group">
 							<p:outputLabel for="sobrenome"
