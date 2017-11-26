@@ -5,6 +5,7 @@ import java.util.Collection;
 import java.util.Date;
 
 import javax.persistence.*;
+import javax.validation.constraints.Future;
 
 @Entity
 public class Reserva extends BaseEntity<Long> implements Serializable{
@@ -22,6 +23,7 @@ public class Reserva extends BaseEntity<Long> implements Serializable{
 		
 	}
 	
+	
 	public Reserva(Date data, double valor){
 		this.data = data;
 		this.valor = valor;
@@ -31,6 +33,7 @@ public class Reserva extends BaseEntity<Long> implements Serializable{
 		return data;
 	}
 
+	
 	public void setData(Date data) {
 		this.data = data;
 	}
