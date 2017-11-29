@@ -54,16 +54,16 @@
 						<div class="form-group">
 							<p:outputLabel for="tipoCliente" value="#{messages['diaria.form.tipo.label']}" />
 							<p:selectOneMenu id="tipoCliente" value="#{gerenciarDiariaAvulsaMB.tipo}" required="true" style="width: 100%">
-								<p:ajax render=":cnpjwrapper" listener="#{gerenciarDiariaAvulsaMB.selectListener}"/>
+								<p:ajax update="cnpjwrapper" listener="#{gerenciarDiariaAvulsaMB.selectListener}"/>
 				                <f:selectItem itemLabel="#{messages['diaria.form.tipo.hint']}" itemValue="" noSelectionOption="true" />
 				                <f:selectItem itemLabel="#{messages['diaria.form.pf']}" itemValue="PF"/>
 				                <f:selectItem itemLabel="#{messages['diaria.form.pj']}" itemValue="PJ"/>
 				            </p:selectOneMenu>
 			            </div>
 
-						<h:panelGroup layout="block" class="form-group" id="cnpjwrapper" rendered="#{gerenciarDiariaAvulsaMB.rendered}">
-							<p:outputLabel for="cnpj" value="#{messages['diaria.form.cnpj.label']}" />
-							<p:selectOneMenu id="cnpj" required="true" style="width: 100%">
+						<h:panelGroup layout="block" class="form-group" id="cnpjwrapper" >
+							<p:outputLabel for="cnpj" value="#{messages['diaria.form.cnpj.label']}" rendered="#{gerenciarDiariaAvulsaMB.rendered}"/>
+							<p:selectOneMenu id="cnpj" required="true" style="width: 100%" rendered="#{gerenciarDiariaAvulsaMB.rendered}">
 				                <f:selectItem itemLabel="#{messages['diaria.form.cnpj.hint']}" itemValue="" noSelectionOption="true" />
 				                
 				            </p:selectOneMenu>

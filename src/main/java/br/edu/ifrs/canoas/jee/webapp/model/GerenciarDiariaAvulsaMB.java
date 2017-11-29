@@ -30,7 +30,7 @@ public class GerenciarDiariaAvulsaMB {
 	private List<Quarto> quartos;
 	
 	private String tipo;
-	private boolean rendered;
+	private boolean rendered = false;
 	
 	public String salva() {
 		gerenciarDiariaAvulsaService.salvaDiaria(diariaAvulsa);
