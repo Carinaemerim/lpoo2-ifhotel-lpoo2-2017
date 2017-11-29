@@ -30,7 +30,7 @@ public class GerenciarDiariaAvulsaMB {
 	private List<Quarto> quartos;
 	
 	private String tipo;
-	private boolean rendered = true;
+	private boolean rendered;
 	
 	public String salva() {
 		gerenciarDiariaAvulsaService.salvaDiaria(diariaAvulsa);
@@ -38,7 +38,6 @@ public class GerenciarDiariaAvulsaMB {
 		return limpa();
 	}
 	
-	@PostConstruct
     public void init() {
 		diariasAvulsas = gerenciarDiariaAvulsaService.busca();	
 		quartos = gerenciarQuartoService.buscaNumero(null);
@@ -80,6 +79,7 @@ public class GerenciarDiariaAvulsaMB {
 	
 	public void selectListener(){
 		setRendered(getTipo().contains("PJ"));
+		System.out.println("Tipo: "+tipo+", rendered: "+rendered);
 	}
 	
 	public String limpa() {

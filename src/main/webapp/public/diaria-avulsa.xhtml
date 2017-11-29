@@ -102,14 +102,14 @@
 					</div>
 					
 					<div class="box-footer">
-						<h:panelGroup rendered="#{empty gerenciarUsuarioMB.usuarios}">
-							<em><p:outputLabel value="#{messages['users.empty']}" />.</em>
+						<h:panelGroup rendered="#{empty gerenciarDiariaAvulsaMB.diariasAvulsas}">
+							<em><p:outputLabel value="#{messages['diarias.empty']}" />.</em>
 						</h:panelGroup>
 						
-						<p:dataTable var="_usr" value="#{gerenciarUsuarioMB.usuarios}" id="tb-usuarios"
+						<p:dataTable var="_diaria" value="#{gerenciarUsuarioMB.usuarios}" id="tb-usuarios"
 							rendered="#{not empty gerenciarUsuarioMB.usuarios}">
 							<p:column headerText="#{messages['diaria.table.rooms']}">
-								<h:outputText value="#{_usr.nome}" />
+								<h:outputText value="#{_diaria.nome}" />
 							</p:column>
 							<p:column headerText="#{messages['diaria.table.cpf']}">
 								<h:outputText value="#{_usr.sobrenome}" />
