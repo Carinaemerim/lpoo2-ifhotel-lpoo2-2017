@@ -7,27 +7,33 @@ import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import br.edu.ifrs.canoas.jee.webapp.model.dao.PessoaFisicaDAO;
 import br.edu.ifrs.canoas.jee.webapp.model.entity.DiariaAvulsa;
+import br.edu.ifrs.canoas.jee.webapp.model.entity.PessoaFisica;
+import br.edu.ifrs.canoas.jee.webapp.model.entity.PessoaJuridica;
 import br.edu.ifrs.canoas.jee.webapp.model.entity.Quarto;
 import br.edu.ifrs.canoas.jee.webapp.service.GerenciarDiariaAvulsaService;
+import br.edu.ifrs.canoas.jee.webapp.service.GerenciarPessoaJuridicaService;
 import br.edu.ifrs.canoas.jee.webapp.service.GerenciarQuartoService;
 
 @Named
 @RequestScoped
-public class GerenciarDiariaAvulsaMB {
-	
+public class GerenciarDiariaAvulsaMB {	
 	@Inject
-    private GerenciarDiariaAvulsaService gerenciarDiariaAvulsaService;
-	
+    private GerenciarDiariaAvulsaService gerenciarDiariaAvulsaService;	
 	@Inject
-	private GerenciarQuartoService gerenciarQuartoService;
-	
+	private GerenciarQuartoService gerenciarQuartoService;	
+	@Inject
+	private GerenciarPessoaJuridicaService gerenciarPJService;	
 	@Inject
 	private DiariaAvulsa diariaAvulsa;
+	@Inject
+	private PessoaFisicaDAO pfDAO;
 	
 	private List<DiariaAvulsa> diariasAvulsas;
-	
 	private List<Quarto> quartos;
+	private List<PessoaJuridica> pessoasJuridicas;
+	private List<PessoaFisica> pessoasFisicas;
 	
 	private String tipo;
 	private boolean rendered = false;
@@ -38,9 +44,11 @@ public class GerenciarDiariaAvulsaMB {
 		return limpa();
 	}
 	
+	@PostConstruct
     public void init() {
 		diariasAvulsas = gerenciarDiariaAvulsaService.busca();	
 		quartos = gerenciarQuartoService.buscaNumero(null);
+		pessoasJuridicas = gerenciarPJService.lista();
     }
 	
 	
@@ -77,6 +85,14 @@ public class GerenciarDiariaAvulsaMB {
 		this.quartos = quartos;
 	}
 	
+	public List<PessoaJuridica> getPessoasJuridicas() {
+		return pessoasJuridicas;
+	}
+
+	public void setPessoasJuridicas(List<PessoaJuridica> pessoasJuridicas) {
+		this.pessoasJuridicas = pessoasJuridicas;
+	}
+
 	public void selectListener(){
 		setRendered(getTipo().contains("PJ"));
 		System.out.println("Tipo: "+tipo+", rendered: "+rendered);
@@ -101,5 +117,14 @@ public class GerenciarDiariaAvulsaMB {
 
 	public void setRendered(boolean rendered) {
 		this.rendered = rendered;
+	}
+	
+	//MOCK
+	public List<PessoaFisica> getPessoasFisicas(){
+		return pfDAO.lista();
+	}
+	
+	public void setPessoasFisicas(List<PessoaFisica> pessoasFisicas){
+		this.pessoasFisicas = pessoasFisicas;
 	}
 }

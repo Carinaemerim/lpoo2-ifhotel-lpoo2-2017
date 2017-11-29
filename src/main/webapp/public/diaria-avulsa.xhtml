@@ -48,9 +48,9 @@
 						</div>
 					</div>
 					
-					<div class="box-body" id="form-usuario">
+					<div class="box-body" id="form-diaria">
 						
-						<h:inputHidden value="#{gerenciarUsuarioMB.usuario.id}" id="hiddenId" />
+						<h:inputHidden value="#{gerenciarDiariaAvulsaMB.diariaAvulsa.id}" id="hiddenId" />
 						<div class="form-group">
 							<p:outputLabel for="tipoCliente" value="#{messages['diaria.form.tipo.label']}" />
 							<p:selectOneMenu id="tipoCliente" value="#{gerenciarDiariaAvulsaMB.tipo}" required="true" style="width: 100%">
@@ -61,19 +61,21 @@
 				            </p:selectOneMenu>
 			            </div>
 
-						<h:panelGroup layout="block" class="form-group" id="cnpjwrapper" >
-							<p:outputLabel for="cnpj" value="#{messages['diaria.form.cnpj.label']}" rendered="#{gerenciarDiariaAvulsaMB.rendered}"/>
-							<p:selectOneMenu id="cnpj" required="true" style="width: 100%" rendered="#{gerenciarDiariaAvulsaMB.rendered}">
-				                <f:selectItem itemLabel="#{messages['diaria.form.cnpj.hint']}" itemValue="" noSelectionOption="true" />
-				                
-				            </p:selectOneMenu>
+						<h:panelGroup layout="block" class="form-group" id="cnpjwrapper">
+							<h:panelGroup layout="block" rendered="#{gerenciarDiariaAvulsaMB.rendered}">
+								<p:outputLabel for="cnpj" value="#{messages['diaria.form.cnpj.label']}"/>
+								<p:selectOneMenu id="cnpj" required="true" style="width: 100%">
+					                <f:selectItem itemLabel="#{messages['diaria.form.cnpj.hint']}" itemValue="" noSelectionOption="true" />
+					                <f:selectItems value="#{gerenciarDiariaAvulsaMB.pessoasJuridicas}" var="pj" itemLabel="#{pj.cnpj}"/>
+					            </p:selectOneMenu>
+							</h:panelGroup>
 						</h:panelGroup>
 
 						<div class="form-group">
 							<p:outputLabel for="cpf" value="#{messages['diaria.form.cpf.label']}" />
 							<p:selectOneMenu id="cpf" required="true" style="width: 100%">
 				                <f:selectItem itemLabel="#{messages['diaria.form.cpf.hint']}" itemValue="" noSelectionOption="true" />
-				                
+				                <f:selectItems value="#{gerenciarDiariaAvulsaMB.pessoasFisicas}" var="pf" itemLabel="#{pf.cpf}"/>
 				            </p:selectOneMenu>
 						</div>
 
@@ -92,10 +94,10 @@
 						</div>
 
 						<p:commandButton value="#{messages['clean']}" 
-						    action="#{gerenciarUsuarioMB.limpa}" styleClass="btn btn-default"
+						    action="#{gerenciarDiariaAvulsaMB.limpa}" styleClass="btn btn-default"
 							ajax="false" style="border: none;" immediate="true" />
 							
-						<h:commandButton value="Salvar" action="#{gerenciarUsuarioMB.salva}"
+						<h:commandButton value="Salvar" action="#{gerenciarDiariaAvulsaMB.salva}"
 							styleClass="btn btn-primary pull-right">
 							
 						</h:commandButton>
@@ -106,32 +108,32 @@
 							<em><p:outputLabel value="#{messages['diarias.empty']}" />.</em>
 						</h:panelGroup>
 						
-						<p:dataTable var="_diaria" value="#{gerenciarUsuarioMB.usuarios}" id="tb-usuarios"
-							rendered="#{not empty gerenciarUsuarioMB.usuarios}">
+						<p:dataTable var="_diaria" value="#{gerenciarDiariaAvulsaMB.diariasAvulsas}" id="tb-diariasAvulsas"
+							rendered="#{not empty gerenciarDiariaAvulsaMB.diariasAvulsas}">
 							<p:column headerText="#{messages['diaria.table.rooms']}">
-								<h:outputText value="#{_diaria.nome}" />
+								<h:outputText value="#{_diaria.quarto.numero}" />
 							</p:column>
 							<p:column headerText="#{messages['diaria.table.cpf']}">
-								<h:outputText value="#{_usr.sobrenome}" />
+								<h:outputText value="#{_diaria.cliente.cpf}" />
 							</p:column>
 							<p:column headerText="#{messages['diaria.table.entrydate']}">
-								<h:outputText value="#{_usr.email}" />
+								<h:outputText value="#{_diaria.data}" />
 							</p:column>
 							<p:column headerText="#{messages['diaria.table.nbrdays']}">
-								<h:outputText value="#{_usr.senha}" />
+								<h:outputText value="#{_diaria.qntDias}" />
 							</p:column>
 
 							<p:column headerText="Ações">
 								<!-- EDITA -->
 								<h:commandButton value="#{messages['edit']}" immediate="true" styleClass="btn btn-default"
-									action="#{gerenciarUsuarioMB.edita(_usr)}" update="form-usuario" >
+									action="#{gerenciarDiariaAvulsaMB.edita(_diaria)}" update="form-diaria" >
 									<p:ajax update=":mainForm:user-content" />
 								</h:commandButton>
 				 				<!-- EXCLUI -->
 								<h:commandLink value="#{messages['delete']}" immediate="true" styleClass="btn btn-default"
-									action="#{gerenciarUsuarioMB.exclui}" ajax="true" update="tb-usuarios">									
+									action="#{gerenciarDiariaAvulsaMB.exclui}" ajax="true" update="tb-diariasAvulsas">									
 									<f:setPropertyActionListener value="#{_usr}"
-										target="#{gerenciarUsuarioMB.usuario}" />
+										target="#{gerenciarDiariaAvulsaMB.diariaAvulsa}" />
 								</h:commandLink>
 							</p:column>
 						</p:dataTable>
