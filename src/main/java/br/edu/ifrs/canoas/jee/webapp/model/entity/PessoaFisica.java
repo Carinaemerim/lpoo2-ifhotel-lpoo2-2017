@@ -61,17 +61,7 @@ public class PessoaFisica extends Pessoa{
 	}
 	
 	public void setCpf(String cpf) {
-		if(cpf==null) {
-			throw new IllegalArgumentException("CPF vazio.");
-		}
-		if(cpf.length()!=11) {
-			throw new IllegalArgumentException("CPF deve possuir 11 caracteres.");
-		}
-		for (int i = 0; i < cpf.length(); i++) {
-			if (!Character.isDigit(cpf.charAt(i))) {
-				throw new IllegalArgumentException("CPF deve possuir apenas caracteres numericos.");
-			}
-		}
+		
 		this.cpf = cpf;
 	}
 	

@@ -10,6 +10,7 @@ import javax.inject.Named;
 
 import br.edu.ifrs.canoas.jee.webapp.model.dao.PessoaFisicaDAO;
 import br.edu.ifrs.canoas.jee.webapp.model.dao.PessoaJuridicaDAO;
+import br.edu.ifrs.canoas.jee.webapp.model.dao.QuartoDAO;
 import br.edu.ifrs.canoas.jee.webapp.model.entity.PessoaFisica;
 import br.edu.ifrs.canoas.jee.webapp.model.entity.PessoaJuridica;
 import br.edu.ifrs.canoas.jee.webapp.model.entity.Quarto;
@@ -25,13 +26,13 @@ public class GerenciarReservaMB {
     private GerenciarReservaService gerenciarReservaService;
 	
 	@Inject
-	private GerenciarQuartoService gerenciarQuartoService;
-	
-	@Inject
 	private PessoaFisicaDAO pfDAO;
 	
 	@Inject
 	private PessoaJuridicaDAO pjDAO;
+	
+	@Inject
+	private QuartoDAO qDAO;
 	
 	@Inject
 	private Reserva reserva;
@@ -46,48 +47,36 @@ public class GerenciarReservaMB {
 	private String tipo;
 	private boolean rendered = true;
 	
-	private Long pessoaF_id;
-	private Long pessoaJ_id;
+	private Long pessoaFId;
+	private Long pessoaJId;
+	private Long quartoId;
 	
+	
+
 	public String salva() {
 		
-		PessoaFisica pessoaF = pfDAO.busca(pessoaF_id);
+		PessoaFisica pessoaF = pfDAO.busca(pessoaFId);
 		reserva.setCliente(pessoaF);
-
-	
-		gerenciarReservaService.criaDiaria(reserva.getQntDias(), reserva.getData());
+//		Quarto quarto = qDAO.busca(quartoId);
+//
+//		reserva.setDiariasReservadas(gerenciarReservaService.criaDiaria(reserva.getQntDias(), reserva.getData(), quarto));
+//		
 		gerenciarReservaService.salvaReserva(reserva);
+//		gerenciarReservaService.colocaReservaNaDiaria(reserva.getDiariasReservadas(), reserva);
 		this.init();
 		return limpa();
 	}
 	
-	public Long getPessoaF_id() {
-		return pessoaF_id;
-	}
-
-	public void setPessoaF_id(Long pessoaF_id) {
-		this.pessoaF_id = pessoaF_id;
-	}
-
-	public Long getPessoaJ_id() {
-		return pessoaJ_id;
-	}
-
-	public void setPessoaJ_id(Long pessoaJ_id) {
-		this.pessoaJ_id = pessoaJ_id;
-	}
-
 	@SuppressWarnings("unchecked")
 	@PostConstruct
     public void init() {
 		reservas = gerenciarReservaService.busca();	
-		quartos = gerenciarQuartoService.buscaNumero(null);
+		quartos = qDAO.lista();
 		pf = pfDAO.lista();
 		pj = pjDAO.lista();
 		
     }
-	
-	
+
 	public void exclui() {
 		gerenciarReservaService.exclui(reserva);
 		this.init();
@@ -161,5 +150,33 @@ public class GerenciarReservaMB {
 	public void setPj(List<PessoaJuridica> pj) {
 		this.pj = pj;
 	}
+	
+	public Long getPessoaFId() {
+		return pessoaFId;
+	}
+
+	public void setPessoaFId(Long pessoaFId) {
+		this.pessoaFId = pessoaFId;
+	}
+
+	public Long getPessoaJId() {
+		return pessoaJId;
+	}
+
+	public void setPessoaJId(Long pessoaJId) {
+		this.pessoaJId = pessoaJId;
+	}
+
+	public Long getQuartoId() {
+		return quartoId;
+	}
+
+	public void setQuartoId(Long quartoId) {
+		this.quartoId = quartoId;
+	}
+
+	
 }
+
+	
 

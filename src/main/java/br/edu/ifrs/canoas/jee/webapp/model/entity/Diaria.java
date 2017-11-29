@@ -17,6 +17,7 @@ public abstract class Diaria extends BaseEntity<Long> implements Serializable {
 	private Quarto quarto;
 	@ManyToMany(cascade=CascadeType.MERGE)
 	private Collection<PessoaFisica> hospedes;
+	private int qntdDias;
 
 	public Diaria() {
 
@@ -79,5 +80,13 @@ public abstract class Diaria extends BaseEntity<Long> implements Serializable {
 		} else if (!quarto.equals(other.quarto))
 			return false;
 		return true;
+	}
+
+	public int getQntdDias() {
+		return qntdDias;
+	}
+
+	public void setQntdDias(int qntdDias) {
+		this.qntdDias = qntdDias;
 	}
 }

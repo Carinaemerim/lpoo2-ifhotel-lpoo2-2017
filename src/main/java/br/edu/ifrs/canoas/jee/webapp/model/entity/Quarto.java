@@ -13,6 +13,7 @@ public class Quarto extends BaseEntity<Long> implements Serializable{
 	private String numero;
 	@Enumerated(EnumType.STRING)
 	private TipoDeQuarto tipo;
+	private Boolean situacao;
 	
 	public Quarto(){
 		
@@ -65,5 +66,13 @@ public class Quarto extends BaseEntity<Long> implements Serializable{
 		if (tipo != other.tipo)
 			return false;
 		return true;
+	}
+
+	public Boolean getSituacao() {
+		return situacao;
+	}
+
+	public void setSituacao(Boolean situacao) {
+		this.situacao = situacao;
 	}
 }

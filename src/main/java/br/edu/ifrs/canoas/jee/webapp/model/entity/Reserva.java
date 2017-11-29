@@ -4,8 +4,12 @@ import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
 
-import javax.persistence.*;
-import javax.validation.constraints.Future;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
+import javax.persistence.Transient;
 
 @Entity
 public class Reserva extends BaseEntity<Long> implements Serializable{
@@ -15,20 +19,37 @@ public class Reserva extends BaseEntity<Long> implements Serializable{
 	private double valor;
 	@ManyToOne(cascade=CascadeType.MERGE)
 	@JoinColumn(name="pessoa_id")
-	private Pessoa cliente;
-	@OneToMany(mappedBy="reserva")
-	private Collection<DiariaReservada> diariasReservadas;
+	private PessoaFisica cliente;
 	
-	@Transient
-	private int qntDias;
+	@OneToOne
+	private DiariaReservada diariaReservada;
 	
-	public int getQntDias() {
-		return qntDias;
+	public DiariaReservada getDiariaReservada() {
+		return diariaReservada;
 	}
 
-	public void setQntDias(int qntDias) {
-		this.qntDias = qntDias;
+
+	public void setDiariaReservada(DiariaReservada diariaReservada) {
+		this.diariaReservada = diariaReservada;
 	}
+
+
+	@Transient
+	public String getNumeroQuarto(){
+		
+		if(diariaReservada == null){
+			return null;
+		}
+		
+		
+		
+		if(diariaReservada.getQuarto() == null){
+			return null;
+		}
+		
+		return diariaReservada.getQuarto().getNumero();
+	}
+	
 
 	public Reserva(){
 		
@@ -56,19 +77,12 @@ public class Reserva extends BaseEntity<Long> implements Serializable{
 		this.valor = valor;
 	}
 
-	public Pessoa getCliente() {
+	public PessoaFisica getCliente() {
 		return cliente;
 	}
 
-	public void setCliente(Pessoa cliente) {
+	public void setCliente(PessoaFisica cliente) {
 		this.cliente = cliente;
 	}
 
-	public Collection<DiariaReservada> getDiariasReservadas() {
-		return diariasReservadas;
-	}
-
-	public void setDiariasReservadas(Collection<DiariaReservada> diariasReservadas) {
-		this.diariasReservadas = diariasReservadas;
-	}
 }

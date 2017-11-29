@@ -1,6 +1,9 @@
 package br.edu.ifrs.canoas.jee.webapp.service;
 
 
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Logger;
@@ -18,7 +21,9 @@ import br.edu.ifrs.canoas.jee.webapp.model.dao.PessoaJuridicaDAO;
 import br.edu.ifrs.canoas.jee.webapp.model.dao.QuartoDAO;
 import br.edu.ifrs.canoas.jee.webapp.model.dao.ReservaDAO;
 import br.edu.ifrs.canoas.jee.webapp.model.entity.DiariaAvulsa;
+import br.edu.ifrs.canoas.jee.webapp.model.entity.DiariaReservada;
 import br.edu.ifrs.canoas.jee.webapp.model.entity.PessoaFisica;
+import br.edu.ifrs.canoas.jee.webapp.model.entity.Quarto;
 import br.edu.ifrs.canoas.jee.webapp.model.entity.Reserva;
 import br.edu.ifrs.canoas.jee.webapp.model.entity.Usuario;
 import br.edu.ifrs.canoas.jee.webapp.util.Mensagens;
@@ -71,14 +76,7 @@ public class GerenciarReservaService {
 		
 	}
 	
-	public void criaDiaria(int qntdDias, Date dataIni){
-		
-		
-		for(int i = 0; i < qntdDias; i++){
-			
-		}
-	}
-
+	
 	public Reserva get(Long id) {
 		
 		return reservaDAO.busca(id);
