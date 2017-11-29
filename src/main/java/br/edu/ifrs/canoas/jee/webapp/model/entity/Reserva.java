@@ -19,10 +19,20 @@ public class Reserva extends BaseEntity<Long> implements Serializable{
 	@OneToMany(mappedBy="reserva")
 	private Collection<DiariaReservada> diariasReservadas;
 	
+	@Transient
+	private int qntDias;
+	
+	public int getQntDias() {
+		return qntDias;
+	}
+
+	public void setQntDias(int qntDias) {
+		this.qntDias = qntDias;
+	}
+
 	public Reserva(){
 		
 	}
-	
 	
 	public Reserva(Date data, double valor){
 		this.data = data;

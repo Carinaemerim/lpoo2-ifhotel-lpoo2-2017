@@ -1,8 +1,7 @@
 package br.edu.ifrs.canoas.jee.webapp.service;
 
-import java.math.BigInteger;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
+
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -19,6 +18,7 @@ import br.edu.ifrs.canoas.jee.webapp.model.dao.PessoaJuridicaDAO;
 import br.edu.ifrs.canoas.jee.webapp.model.dao.QuartoDAO;
 import br.edu.ifrs.canoas.jee.webapp.model.dao.ReservaDAO;
 import br.edu.ifrs.canoas.jee.webapp.model.entity.DiariaAvulsa;
+import br.edu.ifrs.canoas.jee.webapp.model.entity.PessoaFisica;
 import br.edu.ifrs.canoas.jee.webapp.model.entity.Reserva;
 import br.edu.ifrs.canoas.jee.webapp.model.entity.Usuario;
 import br.edu.ifrs.canoas.jee.webapp.util.Mensagens;
@@ -47,6 +47,7 @@ public class GerenciarReservaService {
 	@Inject
 	private Logger log;
 	
+
 	public boolean salvaReserva(Reserva reserva){
 		log.info("Salvando reserva em "+reserva.getData());
 	
@@ -69,12 +70,21 @@ public class GerenciarReservaService {
 		log.info("Excluída reserva do dia "+reserva.getData()+" com id "+reserva.getId());
 		
 	}
+	
+	public void criaDiaria(int qntdDias, Date dataIni){
+		
+		
+		for(int i = 0; i < qntdDias; i++){
+			
+		}
+	}
 
 	public Reserva get(Long id) {
 		
 		return reservaDAO.busca(id);
 	}
 	
+	@SuppressWarnings("unchecked")
 	public List<Reserva> busca(){
 		return reservaDAO.lista();
 	}
