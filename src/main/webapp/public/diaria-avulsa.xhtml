@@ -74,8 +74,8 @@
 						<div class="form-group">
 							<p:outputLabel for="cpf" value="#{messages['diaria.form.cpf.label']}" />
 							<p:selectOneMenu id="cpf" required="true" style="width: 100%">
-				                <f:selectItem itemLabel="#{messages['diaria.form.cpf.hint']}" itemValue="" noSelectionOption="true" />
-				                <f:selectItems value="#{gerenciarDiariaAvulsaMB.pessoasFisicas}" var="pf" itemLabel="#{pf.cpf}"/>
+				                <f:selectItem itemLabel="#{messages['diaria.form.cpf.hint']}" itemValue="" noSelectionOption="true" value="#{gerenciarDiariaAvulsaMB.diariaAvulsa.cliente}"/>
+				                <f:selectItems value="#{gerenciarDiariaAvulsaMB.pessoasFisicas}" var="pf" itemLabel="#{pf.cpf}" />
 				            </p:selectOneMenu>
 						</div>
 
@@ -120,7 +120,7 @@
 								<h:outputText value="#{_diaria.data}" />
 							</p:column>
 							<p:column headerText="#{messages['diaria.table.nbrdays']}">
-								<h:outputText value="#{_diaria.qntDias}" />
+								<h:outputText value="5" />
 							</p:column>
 
 							<p:column headerText="Ações">
