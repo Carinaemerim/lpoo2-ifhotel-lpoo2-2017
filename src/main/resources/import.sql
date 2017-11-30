@@ -1,4 +1,3 @@
-
 insert into Usuario (id, nome, email, senha, sobrenome) values (0, 'John', 'john.smith@mailinator.com', '2125551212', ' Smith');
 insert into Endereco (id, logradouro, numero, complemento, cep, bairro, uf) values (0, 'Rua Dra. Maria Zélia Carneiro de Figueiredo', 870, 'Campus Canoas', '92412240', 'Igara', 'RS');
 insert into PessoaFisica (id, nome, telefone, email, endereco_id, cpf, rg, dataNascimento, sexo) values (0, 'José da Silva', '51992929292', 'josedasilva@gmail.com', 0, '11111111111', '1111111111', '1990-01-01', 'M');

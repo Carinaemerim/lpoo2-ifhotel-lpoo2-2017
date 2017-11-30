@@ -55,7 +55,7 @@ public class GerenciarReservaService {
 
 	public boolean salvaReserva(Reserva reserva){
 		log.info("Salvando reserva em "+reserva.getData());
-	
+		
 		if(reserva.getId() != null){
 			Mensagens.define(FacesMessage.SEVERITY_INFO, "Reserva.atualizada", reserva.getData());
 			reservaDAO.atualiza(reserva);
@@ -68,6 +68,7 @@ public class GerenciarReservaService {
 		return true;
 	}
 	
+
 	public void exclui(Reserva reserva) {
 		
 		reservaDAO.exclui(reserva.getId());
@@ -75,7 +76,6 @@ public class GerenciarReservaService {
 		log.info("Excluída reserva do dia "+reserva.getData()+" com id "+reserva.getId());
 		
 	}
-	
 	
 	public Reserva get(Long id) {
 		

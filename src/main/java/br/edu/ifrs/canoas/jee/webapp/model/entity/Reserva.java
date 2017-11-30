@@ -10,6 +10,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Transient;
+import javax.validation.constraints.Null;
 
 @Entity
 public class Reserva extends BaseEntity<Long> implements Serializable{
@@ -21,6 +22,9 @@ public class Reserva extends BaseEntity<Long> implements Serializable{
 	@JoinColumn(name="pessoa_id")
 	private PessoaFisica cliente;
 	
+	@ManyToOne
+	private PessoaJuridica empresa;
+	
 	@OneToOne
 	private DiariaReservada diariaReservada;
 	
@@ -29,6 +33,16 @@ public class Reserva extends BaseEntity<Long> implements Serializable{
 	}
 
 
+	public PessoaJuridica getEmpresa() {
+		return empresa;
+	}
+
+
+	public void setEmpresa(PessoaJuridica empresa) {
+		this.empresa = empresa;
+	}
+
+	
 	public void setDiariaReservada(DiariaReservada diariaReservada) {
 		this.diariaReservada = diariaReservada;
 	}

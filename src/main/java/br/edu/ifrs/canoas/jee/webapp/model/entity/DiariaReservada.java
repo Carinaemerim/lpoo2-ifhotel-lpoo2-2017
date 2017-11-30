@@ -8,7 +8,7 @@ import javax.persistence.*;
 public class DiariaReservada extends Diaria {
 	private static final long serialVersionUID = 1L;
 	
-	@ManyToOne(cascade={CascadeType.PERSIST, CascadeType.MERGE})
+	@OneToOne
 	@JoinColumn(name="reserva_id")
 	private Reserva reserva;
 

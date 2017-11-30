@@ -1,16 +1,20 @@
 package br.edu.ifrs.canoas.jee.webapp.model;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
+import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import br.edu.ifrs.canoas.jee.webapp.model.dao.DiariaReservadaDAO;
 import br.edu.ifrs.canoas.jee.webapp.model.dao.PessoaFisicaDAO;
 import br.edu.ifrs.canoas.jee.webapp.model.dao.PessoaJuridicaDAO;
 import br.edu.ifrs.canoas.jee.webapp.model.dao.QuartoDAO;
+import br.edu.ifrs.canoas.jee.webapp.model.entity.DiariaReservada;
 import br.edu.ifrs.canoas.jee.webapp.model.entity.PessoaFisica;
 import br.edu.ifrs.canoas.jee.webapp.model.entity.PessoaJuridica;
 import br.edu.ifrs.canoas.jee.webapp.model.entity.Quarto;
@@ -32,10 +36,16 @@ public class GerenciarReservaMB {
 	private PessoaJuridicaDAO pjDAO;
 	
 	@Inject
+	private DiariaReservadaDAO drDAO;
+	
+	@Inject
 	private QuartoDAO qDAO;
 	
 	@Inject
 	private Reserva reserva;
+	
+	@Inject
+	private DiariaReservada diariaReservada;
 	
 	private List<Reserva> reservas = new ArrayList<Reserva>();
 	
@@ -55,18 +65,34 @@ public class GerenciarReservaMB {
 
 	public String salva() {
 		
-		PessoaFisica pessoaF = pfDAO.busca(pessoaFId);
-		reserva.setCliente(pessoaF);
-//		Quarto quarto = qDAO.busca(quartoId);
-//
-//		reserva.setDiariasReservadas(gerenciarReservaService.criaDiaria(reserva.getQntDias(), reserva.getData(), quarto));
-//		
+		if(reserva.getId() != null){
+			Long id = reserva.getDiariaReservada().getId();
+			reserva.setDiariaReservada(null);
+			drDAO.exclui(id);	
+		}
+		
+		diariaReservada.setQuarto(qDAO.busca(quartoId));
+		diariaReservada.setData(reserva.getData());
+		drDAO.insere(diariaReservada);
+		
+		reserva.setDiariaReservada(diariaReservada);
+		
+		reserva.setCliente(pfDAO.busca(pessoaFId));
+		
+		if(pessoaJId != null){
+			PessoaJuridica pessoaJ = pjDAO.busca(pessoaJId);
+			reserva.setEmpresa(pessoaJ);
+		}
+		
 		gerenciarReservaService.salvaReserva(reserva);
-//		gerenciarReservaService.colocaReservaNaDiaria(reserva.getDiariasReservadas(), reserva);
+		
+		diariaReservada.setReserva(reserva);
+		drDAO.atualiza(diariaReservada);
+		
 		this.init();
 		return limpa();
 	}
-	
+		
 	@SuppressWarnings("unchecked")
 	@PostConstruct
     public void init() {
@@ -84,6 +110,9 @@ public class GerenciarReservaMB {
 	
 	public void edita(Reserva reserva) {
 		this.reserva = reserva;
+		this.diariaReservada = reserva.getDiariaReservada();
+		pessoaFId = reserva.getCliente().getId();
+		quartoId = reserva.getDiariaReservada().getQuarto().getId();
 	}
 
 	public Reserva getReserva() {
@@ -173,6 +202,14 @@ public class GerenciarReservaMB {
 
 	public void setQuartoId(Long quartoId) {
 		this.quartoId = quartoId;
+	}
+
+	public DiariaReservada getDiariaReservada() {
+		return diariaReservada;
+	}
+
+	public void setDiariaReservada(DiariaReservada diariaReservada) {
+		this.diariaReservada = diariaReservada;
 	}
 
 	

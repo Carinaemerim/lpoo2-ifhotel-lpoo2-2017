@@ -53,45 +53,42 @@
 						<h:inputHidden value="#{gerenciarReservaMB.reserva.id}" id="hiddenId" />
 						<div class="form-group">
 							<p:outputLabel for="tipoCliente" value="#{messages['diaria.form.tipo.label']}" />
-							<p:selectOneMenu id="tipoCliente" required="false" style="width: 100%">
-								<p:ajax render=":cnpjwrapper" listener="#{gerenciarDiariaAvulsaMB.selectListener}"/>
-				                <f:selectItem itemLabel="#{messages['diaria.form.tipo.hint']}" itemValue="" noSelectionOption="true" />
+							<p:selectOneMenu id="tipoCliente" value="#{gerenciarReservaMB.tipo}" required="false" style="width: 100%">
+								<p:ajax update="cnpjwrapper" listener="#{gerenciarReservaMB.selectListener}"/>
+				                <f:selectItem itemLabel="#{messages['diaria.form.tipo.hint']}" itemValue="PJ" noSelectionOption="true" />
 				                <f:selectItem itemLabel="#{messages['diaria.form.pf']}" itemValue="PF"/>
 				                <f:selectItem itemLabel="#{messages['diaria.form.pj']}" itemValue="PJ"/>
 				            </p:selectOneMenu>
-			            </div>
+			            </div>	
 
-						<h:panelGroup layout="block" class="form-group" id="cnpjwrapper" rendered="#{gerenciarReservaMB.rendered}">
-							<p:outputLabel for="cnpj" value="#{messages['diaria.form.cnpj.label']}" />
-							<p:selectOneMenu id="cnpj" required="false" style="width: 100%">
-				                <f:selectItem itemLabel="#{messages['diaria.form.cnpj.hint']}" itemValue="" noSelectionOption="true" />
-				                <f:selectItems value = "#{gerenciarReservaMB.pj}" var="PessoaPj" itemLabel = "#{PessoaPj.cnpj}" itemValue = "#{PessoaPj.id}"/>
-				                
+						<h:panelGroup layout="block" class="form-group" id="cnpjwrapper" >
+							<p:outputLabel for="cnpj" value="#{messages['diaria.form.cnpj.label']}" rendered="#{gerenciarReservaMB.rendered}"/>
+							<p:selectOneMenu required = "false" id="cnpj" style="width: 100%" rendered="#{gerenciarReservaMB.rendered}" value = "#{gerenciarReservaMB.pessoaJId}">
+				                <f:selectItem itemLabel="#{messages['diaria.form.cnpj.hint']}" itemValue="" noSelectionOption="true" />	
+				                 <f:selectItems value = "#{gerenciarReservaMB.pj}" var="PessoaPj" itemLabel = "#{PessoaPj.cnpj}" itemValue = "#{PessoaPj.id}"/>			                
 				                
 				            </p:selectOneMenu>
 						</h:panelGroup>
 
 						<div class="form-group">
 							<p:outputLabel for="cpf" value="#{messages['diaria.form.cpf.label']}" />
-							<p:selectOneMenu id="cpf" required="false" style="width: 100%" value = "#{gerenciarReservaMB.pessoaFId}">
+							<p:selectOneMenu id="cpf" required="false" style="width: 100%"  value = "#{gerenciarReservaMB.pessoaFId}">
 				                <f:selectItem itemLabel="#{messages['diaria.form.cpf.hint']}" itemValue="" noSelectionOption="true" />
 				                <f:selectItems value = "#{gerenciarReservaMB.pf}" var="PessoaF" itemLabel = "#{PessoaF.cpf}" itemValue = "#{PessoaF.id}"/>
-				                
 				            </p:selectOneMenu>
 						</div>
 
 						<div class="form-group">
 							<p:outputLabel for="quarto" value="#{messages['diaria.form.quarto.label']}" />
-							<p:selectOneMenu id="quarto" required="false" style="width: 100%" >
+							<p:selectOneMenu id="quarto" required="false" style="width: 100%" value = "#{gerenciarReservaMB.quartoId}" >
 				                <f:selectItem itemLabel="#{messages['diaria.form.quarto.hint']}" itemValue="" noSelectionOption="true" />
-				                <f:selectItems value="#{gerenciarReservaMB.quartos}" var="quarto" itemLabel="#{quarto.numero}"/>
+				                <f:selectItems value="#{gerenciarReservaMB.quartos}" var="quarto" itemLabel="#{quarto.numero}" itemValue = "#{quarto.id}"/>
 				            </p:selectOneMenu>
 						</div>
 						
 						<div class="form-group">
 							<p:outputLabel for="qtd" value="#{messages['diaria.form.qtd.label']}" />
-							<p:inputText id="qtd" styleClass="form-control" required="false" value = "#{gerenciarReservaMB.reserva.qntDias}" />
-							<f:selectItems value="#{gerenciarReservaMB.reserva.data}" var="data" itemLabel="#{reserva.data}"/>
+							<p:inputText id="qtd" styleClass="form-control" required="false" value = "#{gerenciarReservaMB.diariaReservada.qntdDias}" />
 							<!-- <p:message for="nome" /> -->
 						</div>
 						
@@ -112,13 +109,13 @@
 						
 						<div class="form-group">
 							<p:outputLabel for="valor" value="#{messages['reserva.form.valor.label']}" />
-							<p:inputText id="valor" styleClass="form-control" required="false" value = "#{gerenciarReservaMB.reserva.valor}" />
+							<p:inputText id="valor" styleClass="form-control" required="true" value = "#{gerenciarReservaMB.reserva.valor}" />
 							<!-- <p:message for="valor" /> -->
 						</div>
 
 						<p:commandButton value="#{messages['clean']}" 
 						    action="#{gerenciarReservaMB.limpa}" styleClass="btn btn-default"
-							ajax="false" style="border: none;" immediate="true" />
+							ajax="false" style="border: none;" immediate="true" update="form-usuario" />
 							
 						<h:commandButton value="Salvar" action="#{gerenciarReservaMB.salva}"
 							styleClass="btn btn-primary pull-right">
@@ -132,7 +129,7 @@
 						</h:panelGroup>
 						
 						<p:dataTable var="_res" value="#{gerenciarReservaMB.reservas}" id="tb-usuarios"
-							rendered="#{not empty gerenciarReservaMB.reservas}">
+						 rendered="#{not empty gerenciarReservaMB.reservas}">
 							
 							<p:column headerText="#{messages['reserva.label.quarto']}">
 								<h:outputText value="#{_res.numeroQuarto}" />
@@ -145,7 +142,7 @@
 								<h:outputText value="#{_res.data}" />
 							</p:column>
 							<p:column headerText="#{messages['diaria.table.nbrdays']}">
-								<h:outputText value="#{_res.diariasReservadas.size()}" />
+								<h:outputText value="#{_res.diariaReservada.qntdDias}" />
 							</p:column>
 
 							<p:column headerText="Ação">
@@ -156,8 +153,8 @@
 								</h:commandButton>
 				 				<!-- EXCLUI -->
 								<h:commandLink value="#{messages['delete']}" immediate="true" styleClass="btn btn-default"
-									action="#{gerenciarReserva.exclui}" ajax="true" update="tb-usuarios">									
-									<f:setPropertyActionListener value="#{_usr}"
+									action="#{gerenciarReservaMB.exclui}" ajax="true" update="tb-usuarios">									
+									<f:setPropertyActionListener value="#{_res}"
 										target="#{gerenciarReservaMB.reserva}" />
 								</h:commandLink>
 							</p:column>
