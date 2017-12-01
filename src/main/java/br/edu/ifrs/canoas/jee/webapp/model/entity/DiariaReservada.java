@@ -8,23 +8,14 @@ import javax.persistence.*;
 public class DiariaReservada extends Diaria {
 	private static final long serialVersionUID = 1L;
 	
-	@OneToOne
-	@JoinColumn(name="reserva_id")
-	private Reserva reserva;
-
 	public DiariaReservada() {
-
+		
+		super();
 	}
 	
 	public DiariaReservada(Date data){
 		super(data);
 	}
 
-	public Reserva getReserva() {
-		return reserva;
-	}
-
-	public void setReserva(Reserva reserva) {
-		this.reserva = reserva;
-	}
+	
 }

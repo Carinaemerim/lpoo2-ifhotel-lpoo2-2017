@@ -43,11 +43,8 @@ public class GerenciarReservaMB {
 	
 	@Inject
 	private Reserva reserva;
-	
-	@Inject
-	private DiariaReservada diariaReservada;
-	
-	private List<Reserva> reservas = new ArrayList<Reserva>();
+		
+	private List<Reserva> reservas;
 	
 	private List<Quarto> quartos = new ArrayList<Quarto>();
 	
@@ -57,38 +54,23 @@ public class GerenciarReservaMB {
 	private String tipo;
 	private boolean rendered = true;
 	
-	private Long pessoaFId;
-	private Long pessoaJId;
-	private Long quartoId;
-	
-	
-
 	public String salva() {
 		
-		if(reserva.getId() != null){
-			Long id = reserva.getDiariaReservada().getId();
-			reserva.setDiariaReservada(null);
-			drDAO.exclui(id);	
-		}
+		Quarto quarto = qDAO.busca(reserva.getDiariaReservada().getQuarto().getId());	
+		reserva.getDiariaReservada().setQuarto(quarto);
 		
-		diariaReservada.setQuarto(qDAO.busca(quartoId));
-		diariaReservada.setData(reserva.getData());
-		drDAO.insere(diariaReservada);
+		DiariaReservada dr = reserva.getDiariaReservada();
+		drDAO.insere(dr);
+		reserva.setDiariaReservada(dr);
 		
-		reserva.setDiariaReservada(diariaReservada);
+		PessoaFisica cliente = pfDAO.busca(reserva.getCliente().getId());
+		reserva.setCliente(cliente);
 		
-		reserva.setCliente(pfDAO.busca(pessoaFId));
-		
-		if(pessoaJId != null){
-			PessoaJuridica pessoaJ = pjDAO.busca(pessoaJId);
-			reserva.setEmpresa(pessoaJ);
-		}
+		PessoaJuridica empresa = pjDAO.busca(reserva.getEmpresa().getId());
+		reserva.setEmpresa(empresa);
 		
 		gerenciarReservaService.salvaReserva(reserva);
-		
-		diariaReservada.setReserva(reserva);
-		drDAO.atualiza(diariaReservada);
-		
+	
 		this.init();
 		return limpa();
 	}
@@ -110,9 +92,6 @@ public class GerenciarReservaMB {
 	
 	public void edita(Reserva reserva) {
 		this.reserva = reserva;
-		this.diariaReservada = reserva.getDiariaReservada();
-		pessoaFId = reserva.getCliente().getId();
-		quartoId = reserva.getDiariaReservada().getQuarto().getId();
 	}
 
 	public Reserva getReserva() {
@@ -144,6 +123,7 @@ public class GerenciarReservaMB {
 	}
 	
 	public String limpa() {
+		
 		reserva = new Reserva();
 		return "/public/reserva.jsf?facesRedirect=true";
 	}
@@ -180,37 +160,7 @@ public class GerenciarReservaMB {
 		this.pj = pj;
 	}
 	
-	public Long getPessoaFId() {
-		return pessoaFId;
-	}
-
-	public void setPessoaFId(Long pessoaFId) {
-		this.pessoaFId = pessoaFId;
-	}
-
-	public Long getPessoaJId() {
-		return pessoaJId;
-	}
-
-	public void setPessoaJId(Long pessoaJId) {
-		this.pessoaJId = pessoaJId;
-	}
-
-	public Long getQuartoId() {
-		return quartoId;
-	}
-
-	public void setQuartoId(Long quartoId) {
-		this.quartoId = quartoId;
-	}
-
-	public DiariaReservada getDiariaReservada() {
-		return diariaReservada;
-	}
-
-	public void setDiariaReservada(DiariaReservada diariaReservada) {
-		this.diariaReservada = diariaReservada;
-	}
+	
 
 	
 }

@@ -10,12 +10,14 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Transient;
+import javax.validation.constraints.Future;
 import javax.validation.constraints.Null;
 
 @Entity
 public class Reserva extends BaseEntity<Long> implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
+	@Future
 	private Date data;
 	private double valor;
 	@ManyToOne(cascade=CascadeType.MERGE)
@@ -66,6 +68,10 @@ public class Reserva extends BaseEntity<Long> implements Serializable{
 	
 
 	public Reserva(){
+		super();
+		diariaReservada = new DiariaReservada();
+		cliente = new PessoaFisica();
+		empresa = new PessoaJuridica();
 		
 	}
 	

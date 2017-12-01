@@ -57,13 +57,13 @@ public class GerenciarReservaService {
 		log.info("Salvando reserva em "+reserva.getData());
 		
 		if(reserva.getId() != null){
-			Mensagens.define(FacesMessage.SEVERITY_INFO, "Reserva.atualizada", reserva.getData());
+			Mensagens.define(FacesMessage.SEVERITY_INFO, "Reserva.atualizada");
 			reservaDAO.atualiza(reserva);
 			return true;
 		}
 		
 		reservaDAO.insere(reserva);
-		Mensagens.define(FacesMessage.SEVERITY_INFO, "Reserva.cadastrada", reserva.getData());
+		Mensagens.define(FacesMessage.SEVERITY_INFO, "Reserva.cadastrada");
 		log.info("Salva diária em " + reserva.getData() + " com id " + reserva.getId());
 		return true;
 	}
@@ -72,7 +72,7 @@ public class GerenciarReservaService {
 	public void exclui(Reserva reserva) {
 		
 		reservaDAO.exclui(reserva.getId());
-		Mensagens.define(FacesMessage.SEVERITY_INFO, "Reserva.excluida",reserva.getData());
+		Mensagens.define(FacesMessage.SEVERITY_INFO, "Reserva.excluida");
 		log.info("Excluída reserva do dia "+reserva.getData()+" com id "+reserva.getId());
 		
 	}

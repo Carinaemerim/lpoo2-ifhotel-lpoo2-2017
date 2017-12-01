@@ -13,7 +13,7 @@ public class DiariaAvulsa extends Diaria {
 	private Pessoa cliente;
 
 	public DiariaAvulsa() {
-		
+		super();
 	}
 	
 	public DiariaAvulsa(Date data){

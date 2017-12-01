@@ -53,7 +53,7 @@
 						<h:inputHidden value="#{gerenciarReservaMB.reserva.id}" id="hiddenId" />
 						<div class="form-group">
 							<p:outputLabel for="tipoCliente" value="#{messages['diaria.form.tipo.label']}" />
-							<p:selectOneMenu id="tipoCliente" value="#{gerenciarReservaMB.tipo}" required="false" style="width: 100%">
+							<p:selectOneMenu id="tipoCliente" value="#{gerenciarReservaMB.tipo}" required="false" style="width: 100%" filter="true" filterMatchMode="startsWith">
 								<p:ajax update="cnpjwrapper" listener="#{gerenciarReservaMB.selectListener}"/>
 				                <f:selectItem itemLabel="#{messages['diaria.form.tipo.hint']}" itemValue="PJ" noSelectionOption="true" />
 				                <f:selectItem itemLabel="#{messages['diaria.form.pf']}" itemValue="PF"/>
@@ -62,8 +62,8 @@
 			            </div>	
 
 						<h:panelGroup layout="block" class="form-group" id="cnpjwrapper" >
-							<p:outputLabel for="cnpj" value="#{messages['diaria.form.cnpj.label']}" rendered="#{gerenciarReservaMB.rendered}"/>
-							<p:selectOneMenu required = "false" id="cnpj" style="width: 100%" rendered="#{gerenciarReservaMB.rendered}" value = "#{gerenciarReservaMB.pessoaJId}">
+							<p:outputLabel for="cnpj" value="#{messages['diaria.form.cnpj.label']}" rendered="#{gerenciarReservaMB.rendered}" />
+							<p:selectOneMenu required = "false" id="cnpj" style="width: 100%" rendered="#{gerenciarReservaMB.rendered}" value = "#{gerenciarReservaMB.reserva.empresa.id}" filter="true" filterMatchMode="startsWith">
 				                <f:selectItem itemLabel="#{messages['diaria.form.cnpj.hint']}" itemValue="" noSelectionOption="true" />	
 				                 <f:selectItems value = "#{gerenciarReservaMB.pj}" var="PessoaPj" itemLabel = "#{PessoaPj.cnpj}" itemValue = "#{PessoaPj.id}"/>			                
 				                
@@ -71,16 +71,16 @@
 						</h:panelGroup>
 
 						<div class="form-group">
-							<p:outputLabel for="cpf" value="#{messages['diaria.form.cpf.label']}" />
-							<p:selectOneMenu id="cpf" required="false" style="width: 100%"  value = "#{gerenciarReservaMB.pessoaFId}">
+							<p:outputLabel for="cpf" value="#{messages['diaria.form.cpf.label']}"/>
+							<p:selectOneMenu id="cpf" required="false" style="width: 100%"  value = "#{gerenciarReservaMB.reserva.cliente.id}" filter="true" filterMatchMode="startsWith">
 				                <f:selectItem itemLabel="#{messages['diaria.form.cpf.hint']}" itemValue="" noSelectionOption="true" />
 				                <f:selectItems value = "#{gerenciarReservaMB.pf}" var="PessoaF" itemLabel = "#{PessoaF.cpf}" itemValue = "#{PessoaF.id}"/>
 				            </p:selectOneMenu>
 						</div>
 
 						<div class="form-group">
-							<p:outputLabel for="quarto" value="#{messages['diaria.form.quarto.label']}" />
-							<p:selectOneMenu id="quarto" required="false" style="width: 100%" value = "#{gerenciarReservaMB.quartoId}" >
+							<p:outputLabel for="quarto" value="#{messages['diaria.form.quarto.label']}"/>
+							<p:selectOneMenu id="quarto" required="false" style="width: 100%" value = "#{gerenciarReservaMB.reserva.diariaReservada.quarto.id}" filter="true" filterMatchMode="startsWith" >
 				                <f:selectItem itemLabel="#{messages['diaria.form.quarto.hint']}" itemValue="" noSelectionOption="true" />
 				                <f:selectItems value="#{gerenciarReservaMB.quartos}" var="quarto" itemLabel="#{quarto.numero}" itemValue = "#{quarto.id}"/>
 				            </p:selectOneMenu>
@@ -88,7 +88,7 @@
 						
 						<div class="form-group">
 							<p:outputLabel for="qtd" value="#{messages['diaria.form.qtd.label']}" />
-							<p:inputText id="qtd" styleClass="form-control" required="false" value = "#{gerenciarReservaMB.diariaReservada.qntdDias}" />
+							<p:inputText id="qtd" styleClass="form-control" required="false" value = "#{gerenciarReservaMB.reserva.diariaReservada.qntdDias}" />
 							<!-- <p:message for="nome" /> -->
 						</div>
 						

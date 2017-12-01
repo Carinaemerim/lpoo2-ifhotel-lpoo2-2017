@@ -17,10 +17,12 @@ public abstract class Diaria extends BaseEntity<Long> implements Serializable {
 	private Quarto quarto;
 	@ManyToMany(cascade=CascadeType.MERGE)
 	private Collection<PessoaFisica> hospedes;
+
+	
 	private int qntdDias;
 
 	public Diaria() {
-
+		quarto = new Quarto();
 	}
 
 	public Diaria(Date data) {
