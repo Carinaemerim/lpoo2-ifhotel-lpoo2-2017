@@ -9,6 +9,7 @@ import br.edu.ifrs.canoas.jee.webapp.model.entity.Quarto;
 
 @Stateless
 public class QuartoDAO extends BaseDAO<Quarto, Long> {
+
 	public List<Quarto> buscaPorNumero(String numero){
 		List<Quarto> query = em.createQuery(
 				"SELECT quarto FROM Quarto quarto WHERE quarto.numero = :numero", Quarto.class
