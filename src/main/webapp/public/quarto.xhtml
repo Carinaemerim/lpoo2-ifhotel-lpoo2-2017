@@ -59,9 +59,9 @@
 							<!-- <p:message for="nome" /> -->
 						</div>
 						
-						<div>
+						<div class = "form-group">
 						   <p:outputLabel for="tipo" value="#{messages['quarto.tipo']}" />
-					        <p:selectOneMenu id="tipo" value="#{gerenciarQuartoMB.quarto.tipo}" style="width:1210px" required= "true">
+					        <p:selectOneMenu id="tipo" value="#{gerenciarQuartoMB.quarto.tipo}" style="width:100%" required= "true">
 					            <f:selectItem itemLabel="#{messages['quarto.form.tipo']}" itemValue="" />
 					            <f:selectItem itemLabel="STANDARD" itemValue="STANDARD" />
 					            <f:selectItem itemLabel="DUPLO" itemValue="DUPLO" />
@@ -72,18 +72,18 @@
 					        </p:selectOneMenu>
 						</div>
 						
-						<h3 style="margin-top:0"> </h3>
-						    <h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5" >
+						<div class="form-group">
 						        <p:outputLabel for="situ" value="#{messages['quarto.table.situacao']}"/>
-						        <p:selectOneRadio id="situ" value="#{gerenciarQuartoMB.quarto.situacao}" >
+						        <p:selectOneRadio id="situ" value="#{gerenciarQuartoMB.quarto.situacao}" required = "true">
 						            <f:selectItem itemLabel="Disponivel" itemValue="Disponivel" />
 						            <f:selectItem itemLabel="Indisponivel" itemValue="Indisponivel" />
 						        </p:selectOneRadio>
-                            </h:panelGrid>
+						</div>
+                            
 											
-						<div>
-						     <h3 style="margin-top: 0">Descricão: </h3>
-						      <p:inputTextarea required = "true" rows="10" cols="50" queryDelay="750" minQueryLength="4"  value = "#{gerenciarQuartoMB.quarto.descricao}"/>
+						<div class = "form-group">
+						      <p:outputLabel for="desc" value = "#{messages['quarto.descricao']}"/>
+						      <p:inputTextarea id="desc" style="display:block" required = "true" rows="10" cols="50" queryDelay="750" minQueryLength="4"  value = "#{gerenciarQuartoMB.quarto.descricao}"/>
 							 
 						</div>
 
