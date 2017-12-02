@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.ejb.Stateless;
 
+import br.edu.ifrs.canoas.jee.webapp.model.entity.PessoaFisica;
 import br.edu.ifrs.canoas.jee.webapp.model.entity.PessoaJuridica;
 
 @Stateless
@@ -25,4 +26,5 @@ public class PessoaJuridicaDAO extends BaseDAO<PessoaJuridica, Long> {
 		
 		return (pjs.size() == 0) ? null : pjs.get(0);
 	}
+	
 }

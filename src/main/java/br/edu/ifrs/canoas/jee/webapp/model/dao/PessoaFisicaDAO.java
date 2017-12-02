@@ -32,4 +32,5 @@ public class PessoaFisicaDAO extends BaseDAO<PessoaFisica, Long> {
 			
 		return (pfs.size() == 0) ? null : pfs.get(0);
 	}
+	
 }

@@ -61,7 +61,7 @@
 						
 						<div class = "form-group">
 						   <p:outputLabel for="tipo" value="#{messages['quarto.tipo']}" />
-					        <p:selectOneMenu id="tipo" value="#{gerenciarQuartoMB.quarto.tipo}" style="width:100%" required= "true">
+					        <p:selectOneMenu id="tipo" value="#{gerenciarQuartoMB.quarto.tipo}" style="width:100%" required= "true" filter="true" filterMatchMode="startsWith">
 					            <f:selectItem itemLabel="#{messages['quarto.form.tipo']}" itemValue="" />
 					            <f:selectItem itemLabel="STANDARD" itemValue="STANDARD" />
 					            <f:selectItem itemLabel="DUPLO" itemValue="DUPLO" />

@@ -3,6 +3,8 @@ package br.edu.ifrs.canoas.jee.webapp.model.entity;
 import java.io.Serializable;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
 import br.edu.ifrs.canoas.jee.webapp.model.TipoDeQuarto;
 
@@ -10,10 +12,18 @@ import br.edu.ifrs.canoas.jee.webapp.model.TipoDeQuarto;
 public class Quarto extends BaseEntity<Long> implements Serializable{	
 	private static final long serialVersionUID = 1L;
 
+	@NotNull
+	@Pattern(regexp ="^[0-9]+$", message = "Numero de Quarto Invalido")
 	private String numero;
+
 	@Enumerated(EnumType.STRING)
+	@NotNull
 	private TipoDeQuarto tipo;
+	
+	@NotNull
 	private String situacao;
+	
+	@NotNull
 	private String descricao;
 	
 	public Quarto(){
