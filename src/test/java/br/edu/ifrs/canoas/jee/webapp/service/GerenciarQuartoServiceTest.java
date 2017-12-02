@@ -129,6 +129,18 @@ public class GerenciarQuartoServiceTest {
 		
 	}
 	
+	@Test
+	public void atualizaQuarto(){
+		Quarto q2 = criaQuarto();
+		q2.setNumero("111");
+		gerenciarQuartoService.salva(q2);
+		assertEquals(gerenciarQuartoService.get(q2.getId()).getDescricao(), "Quarto muito bom");
+		q2.setDescricao("Quarto onde paredes tem ouvidos");
+		gerenciarQuartoService.salva(q2);
+		assertTrue(gerenciarQuartoService.buscaNumero("111").size() == 1);
+		assertEquals(gerenciarQuartoService.get(q2.getId()).getDescricao(), "Quarto onde paredes tem ouvidos");
+	}
+	
 	@Test(expected = Exception.class)
 	public void salvaQuartoNumeroComEspaco(){
 		Quarto q2 = criaQuarto();
