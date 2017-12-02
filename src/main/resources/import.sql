@@ -4,6 +4,5 @@ insert into PessoaFisica (id, nome, telefone, email, endereco_id, cpf, rg, dataN
 insert into PessoaJuridica (id, nome, telefone, email, endereco_id, razaoSocial, cnpj, inscricaoEstadual, inscricaoMunicipal) values (0, 'IFRS Campus Canoas', '5134158200', 'comunicacao@canoas.ifrs.edu.br', 0, 'Instituto Federal de Blablabla do Rio Grande do Sul', '10637926000650', '1234567890', '9876543210');
 insert into PessoaJuridica (id, nome, telefone, email, endereco_id, razaoSocial, cnpj, inscricaoEstadual, inscricaoMunicipal) values (1, 'IFRS Campus Canoas', '5134158200', 'comunicacao@canoas.ifrs.edu.br', 0, 'Instituto Federal de Blablabla do Rio Grande do Sul', '10637926007850', '1234567890', '9876543210');
 insert into PessoaFisica (id, nome, telefone, email, endereco_id, cpf, rg, dataNascimento, sexo) values (1, 'João Rocha', '51992929292', 'josedasilva@gmail.com', 0, '2222222222', '1111111111', '1990-01-01', 'M');
-insert into Quarto (id, numero, tipo) values (0, '701', 'STANDARD');
-insert into Quarto (id, numero, tipo) values (1, '801', 'MASTER');
+
 

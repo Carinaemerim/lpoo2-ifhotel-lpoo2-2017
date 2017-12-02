@@ -1,16 +1,30 @@
 package br.edu.ifrs.canoas.jee.webapp.model.entity;
 
+import java.util.Collection;
+
 import javax.persistence.*;
 
 @Entity
 public class PessoaJuridica extends Pessoa{
-	private static final long serialVersionUID = 1L;
+
+	private static final long serialVersionUID = 7791589693426814096L;
 	
 	private String razaoSocial;
 	private String cnpj;
 	private String inscricaoEstadual;
 	private String inscricaoMunicipal;
 	
+	@OneToMany(mappedBy="empresa")
+	private Collection<Reserva> reservas;
+	
+	public Collection<Reserva> getReservas() {
+		return reservas;
+	}
+
+	public void setReservas(Collection<Reserva> reservas) {
+		this.reservas = reservas;
+	}
+
 	public PessoaJuridica(){
 		
 	}

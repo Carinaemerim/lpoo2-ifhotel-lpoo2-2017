@@ -9,8 +9,8 @@ import br.edu.ifrs.canoas.jee.webapp.model.Sexo;
 
 @Entity
 public class PessoaFisica extends Pessoa{
-	private static final long serialVersionUID = 1L;
 	
+	private static final long serialVersionUID = 4037841475829873186L;
 	private String cpf;
 	private String rg;
 	private Date dataNascimento;
@@ -19,6 +19,17 @@ public class PessoaFisica extends Pessoa{
 	@ManyToMany (mappedBy="hospedes")
 	private Collection<Diaria> diarias;
 	
+	@OneToMany(mappedBy="cliente")
+	private Collection<Reserva> reservas;
+	
+	public Collection<Reserva> getReservas() {
+		return reservas;
+	}
+
+	public void setReservas(Collection<Reserva> reservas) {
+		this.reservas = reservas;
+	}
+
 	public PessoaFisica(){
 		super();
 	}

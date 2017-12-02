@@ -17,8 +17,6 @@ public abstract class Pessoa extends BaseEntity<Long> implements Serializable{
 	private Endereco endereco;
 	@OneToMany (mappedBy="cliente")
     private Collection<DiariaAvulsa> diariasAvulsas;
-	@OneToMany(mappedBy="cliente")
-	private Collection<Reserva> reservas;
 	
 	public Pessoa(){
 		
@@ -73,11 +71,4 @@ public abstract class Pessoa extends BaseEntity<Long> implements Serializable{
 		this.diariasAvulsas = diariasAvulsas;
 	}
 
-	public Collection<Reserva> getReservas() {
-		return reservas;
-	}
-
-	public void setReservas(Collection<Reserva> reservas) {
-		this.reservas = reservas;
-	}
 }

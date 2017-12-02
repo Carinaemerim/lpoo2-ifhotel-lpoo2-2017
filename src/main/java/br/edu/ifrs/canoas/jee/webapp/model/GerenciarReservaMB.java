@@ -75,7 +75,6 @@ public class GerenciarReservaMB {
 		return limpa();
 	}
 		
-	@SuppressWarnings("unchecked")
 	@PostConstruct
     public void init() {
 		reservas = gerenciarReservaService.busca();	

@@ -8,6 +8,9 @@ import br.edu.ifrs.canoas.jee.webapp.model.entity.PessoaJuridica;
 
 @Stateless
 public class PessoaJuridicaDAO extends BaseDAO<PessoaJuridica, Long> {
+
+	private static final long serialVersionUID = -5816640691145539236L;
+
 	public PessoaJuridica buscaPorCnpj(String cnpj){
 		
 		if(cnpj == null){
