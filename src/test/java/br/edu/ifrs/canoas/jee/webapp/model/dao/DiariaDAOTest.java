@@ -16,14 +16,19 @@ import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import br.edu.ifrs.canoas.jee.webapp.model.TipoDeQuarto;
 import br.edu.ifrs.canoas.jee.webapp.model.entity.Diaria;
 import br.edu.ifrs.canoas.jee.webapp.model.entity.DiariaAvulsa;
+import br.edu.ifrs.canoas.jee.webapp.model.entity.Quarto;
 
 @RunWith(Arquillian.class)
 public class DiariaDAOTest {
 
 	@Inject
 	DiariaDAO dDAO;
+	
+	@Inject
+	QuartoDAO qDAO;
 
 	@Deployment
     public static Archive<?> createTestArchive() {
@@ -40,7 +45,14 @@ public class DiariaDAOTest {
 		DiariaAvulsa d1 = new DiariaAvulsa();
 		SimpleDateFormat dt = new SimpleDateFormat( "dd/MM/yyyy" );
 		d1.setData(dt.parse("24/12/2017"));
-		
+		d1.setQntdDias(4);
+		Quarto q1 = new Quarto();
+		q1.setDescricao("sdadas");
+		q1.setNumero("555");
+		q1.setSituacao("Disponível");
+		q1.setTipo(TipoDeQuarto.PRESIDENCIAL);
+		qDAO.insere(q1);
+		d1.setQuarto(q1);
 		dDAO.insere(d1);
 		
 		assertNotNull(dDAO.buscaPorData(dt.parse("24/12/2017")));

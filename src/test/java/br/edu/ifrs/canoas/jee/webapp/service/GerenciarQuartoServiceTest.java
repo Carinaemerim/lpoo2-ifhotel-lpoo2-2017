@@ -141,12 +141,36 @@ public class GerenciarQuartoServiceTest {
 		assertEquals(gerenciarQuartoService.get(q2.getId()).getDescricao(), "Quarto onde paredes tem ouvidos");
 	}
 	
+	@Test
+	public void excluiQuarto(){
+		Quarto q1 = criaQuarto();
+		q1.setNumero("222");
+		gerenciarQuartoService.salva(q1);
+		assertFalse(gerenciarQuartoService.buscaNumero("222").isEmpty());
+		gerenciarQuartoService.exclui(q1);
+		assertTrue(gerenciarQuartoService.buscaNumero("222").isEmpty());
+	}
+		
 	@Test(expected = Exception.class)
 	public void salvaQuartoNumeroComEspaco(){
 		Quarto q2 = criaQuarto();
 		q2.setNumero("1 45");
 		gerenciarQuartoService.salva(q2);
+		assertFalse(gerenciarQuartoService.buscaNumero("1 45").isEmpty());
 	}
+	
+	@Test
+	public void getQuarto(){
+		
+		Quarto q2 = criaQuarto();
+		q2.setNumero("777");
+		gerenciarQuartoService.salva(q2);
+		
+		Quarto q3 = gerenciarQuartoService.get(q2.getId());
+		assertEquals(q3.getNumero(), q2.getNumero());
+		assertEquals(q3.getId(), q2.getId());
+	}
+	
 	
 	public Quarto criaQuarto(){
 		

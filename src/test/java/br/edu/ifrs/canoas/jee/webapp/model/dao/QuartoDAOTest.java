@@ -37,10 +37,14 @@ public class QuartoDAOTest {
 	public void busca_por_numero() {
 		
 		Quarto q1 = new Quarto();
-		q1.setNumero("2");
+		q1.setNumero("201");
+		q1.setDescricao("sdadas");
+		q1.setNumero("555");
+		q1.setSituacao("Disponível");
+		q1.setTipo(TipoDeQuarto.PRESIDENCIAL);
 		qDAO.insere(q1);
 		
-		assertNotNull(qDAO.buscaPorNumero("2"));
+		assertNotNull(qDAO.buscaPorNumero("201"));
 		
 	}
 	
@@ -56,6 +60,9 @@ public class QuartoDAOTest {
 		
 		Quarto q2 = new Quarto();
 		q2.setTipo(TipoDeQuarto.STANDARD);
+		q2.setDescricao("sdadas");
+		q2.setNumero("555");
+		q2.setSituacao("Disponível");
 		qDAO.insere(q2);
 		
 		assertNotNull(qDAO.buscaPorTipo(TipoDeQuarto.STANDARD));

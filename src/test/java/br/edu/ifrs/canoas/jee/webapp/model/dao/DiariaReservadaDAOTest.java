@@ -13,13 +13,18 @@ import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import br.edu.ifrs.canoas.jee.webapp.model.TipoDeQuarto;
 import br.edu.ifrs.canoas.jee.webapp.model.entity.DiariaReservada;
+import br.edu.ifrs.canoas.jee.webapp.model.entity.Quarto;
 
 @RunWith(Arquillian.class)
 public class DiariaReservadaDAOTest {
 
 	@Inject
 	DiariaReservadaDAO drDAO;
+	
+	@Inject
+	QuartoDAO qDAO;
 	
 	@Deployment
     public static Archive<?> createTestArchive() {
@@ -36,6 +41,19 @@ public class DiariaReservadaDAOTest {
 		
 		DiariaReservada dr = new DiariaReservada();
 		DiariaReservada dr1 = new DiariaReservada();
+		dr.setQntdDias(4);
+		dr1.setQntdDias(4);
+		
+		Quarto q1 = new Quarto();
+		q1.setDescricao("sdadas");
+		q1.setNumero("555");
+		q1.setSituacao("Disponível");
+		q1.setTipo(TipoDeQuarto.PRESIDENCIAL);
+		
+		qDAO.insere(q1);
+		dr.setQuarto(q1);
+		dr1.setQuarto(q1);
+		
 		drDAO.insere(dr);
 		drDAO.insere(dr1);
 		

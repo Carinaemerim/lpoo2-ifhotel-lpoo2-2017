@@ -9,6 +9,7 @@ import javax.persistence.TemporalType;
 import br.edu.ifrs.canoas.jee.webapp.model.TipoDeQuarto;
 import br.edu.ifrs.canoas.jee.webapp.model.entity.Quarto;
 
+@SuppressWarnings("serial")
 @Stateless
 public class QuartoDAO extends BaseDAO<Quarto, Long> {
 
