@@ -1,4 +1,4 @@
-package br.edu.ifrs.canoas.jee.webapp.model;
+package br.edu.ifrs.canoas.jee.webapp.service;
 
 import java.math.BigInteger;
 import java.security.MessageDigest;
