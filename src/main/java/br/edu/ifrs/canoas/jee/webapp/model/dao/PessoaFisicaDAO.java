@@ -5,6 +5,8 @@ import java.util.List;
 import javax.ejb.Stateless;
 
 import br.edu.ifrs.canoas.jee.webapp.model.entity.PessoaFisica;
+import br.edu.ifrs.canoas.jee.webapp.model.entity.PessoaFisica;
+import br.edu.ifrs.canoas.jee.webapp.model.entity.PessoaFisica;
 
 @Stateless
 public class PessoaFisicaDAO extends BaseDAO<PessoaFisica, Long> {
@@ -31,6 +33,21 @@ public class PessoaFisicaDAO extends BaseDAO<PessoaFisica, Long> {
 		}
 			
 		return (pfs.size() == 0) ? null : pfs.get(0);
+	}
+	@SuppressWarnings("unchecked")
+	public List<PessoaFisica> buscaPorEmail(String email) {
+		return em.createQuery("SELECT pf " + "FROM PessoaFisica pf " + "WHERE lower(pf.email) = :email ")
+				.setParameter("email", email).getResultList();
+	}
+	public List<PessoaFisica> buscaPorCriterio(String criterio){
+		return em.createQuery(
+		         "SELECT pf "
+		         + "FROM PessoaFisica pf "
+		         + "WHERE lower(pf.email) = :email "
+		         + " or lower (pf.nome) = :nome ")
+		         .setParameter("email", criterio.trim().toLowerCase())
+		         .setParameter("nome", criterio.trim().toLowerCase())
+		         .getResultList();
 	}
 	
 }
