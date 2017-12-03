@@ -17,6 +17,7 @@ public class DiariaDAO extends BaseDAO<Diaria, Long>{
 				"SELECT diaria FROM Diaria diaria WHERE diaria.data = :data", Diaria.class
 				).setParameter("data", data)
 				.getResultList();
+		
 		return query;
 	}
 }

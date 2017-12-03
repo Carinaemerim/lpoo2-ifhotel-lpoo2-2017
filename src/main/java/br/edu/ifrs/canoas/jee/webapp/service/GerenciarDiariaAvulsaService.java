@@ -7,14 +7,14 @@ import javax.ejb.Stateless;
 import javax.faces.application.FacesMessage;
 import javax.inject.Inject;
 
-import br.edu.ifrs.canoas.jee.webapp.model.dao.DiariaDAO;
+import br.edu.ifrs.canoas.jee.webapp.model.dao.DiariaAvulsaDAO;
 import br.edu.ifrs.canoas.jee.webapp.model.entity.DiariaAvulsa;
 import br.edu.ifrs.canoas.jee.webapp.util.Mensagens;
 
 @Stateless
 public class GerenciarDiariaAvulsaService {
 	@Inject
-	private DiariaDAO diariaDAO;
+	private DiariaAvulsaDAO diariaDAO;
 	
 	@Inject
 	private Logger log;
@@ -35,7 +35,7 @@ public class GerenciarDiariaAvulsaService {
 	}
 	
 	public List<DiariaAvulsa> busca(){
-		return diariaDAO.lista();
+		return diariaDAO.buscaFiltrada();
 	}
 	
 	public void exclui(DiariaAvulsa d){

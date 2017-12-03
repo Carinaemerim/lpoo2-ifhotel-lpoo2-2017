@@ -24,21 +24,32 @@ public class GerenciarDiariaAvulsaMB {
 	@Inject
 	private GerenciarQuartoService gerenciarQuartoService;	
 	@Inject
-	private GerenciarPessoaJuridicaService gerenciarPJService;	
+	private GerenciarPessoaJuridicaService gerenciarPJService;
+	@Inject
+	private PessoaFisicaDAO pfDAO;
 	@Inject
 	private DiariaAvulsa diariaAvulsa;
 	@Inject
-	private PessoaFisicaDAO pfDAO;
+	private PessoaFisica pf;
+	@Inject
+	private PessoaJuridica pj;
 	
 	private List<DiariaAvulsa> diariasAvulsas;
 	private List<Quarto> quartos;
 	private List<PessoaJuridica> pessoasJuridicas;
 	private List<PessoaFisica> pessoasFisicas;
 	
-	private String tipo;
-	private boolean rendered = false;
+	private String tipo = "PJ";
+	private boolean rendered;
 	
 	public String salva() {
+		if(tipo.equals("PF")) {
+			diariaAvulsa.setCliente(pf);
+		}else {
+			diariaAvulsa.setCliente(pj);
+		}
+		
+		diariaAvulsa.setHospedes(pessoasFisicas);
 		gerenciarDiariaAvulsaService.salvaDiaria(diariaAvulsa);
 		this.init();
 		return limpa();
@@ -47,8 +58,11 @@ public class GerenciarDiariaAvulsaMB {
 	@PostConstruct
     public void init() {
 		diariasAvulsas = gerenciarDiariaAvulsaService.busca();	
-		quartos = gerenciarQuartoService.buscaNumero(null);
+		quartos = gerenciarQuartoService.buscaDisponiveis();
 		pessoasJuridicas = gerenciarPJService.lista();
+		//"mockado" enquanto o GerenciarPfService não for finalizado pelo Dilan
+		pessoasFisicas = pfDAO.lista();
+		selectListener();
     }
 	
 	
@@ -59,6 +73,13 @@ public class GerenciarDiariaAvulsaMB {
 	
 	public void edita(DiariaAvulsa d) {
 		this.diariaAvulsa = d;
+		if (this.diariaAvulsa.getCliente() instanceof PessoaFisica) {
+			pf = (PessoaFisica) this.diariaAvulsa.getCliente();
+			tipo = "PF";
+		}else {
+			pj = (PessoaJuridica) this.diariaAvulsa.getCliente();
+			tipo = "PJ";
+		}
 	}
 
 	public DiariaAvulsa getDiariaAvulsa() {
@@ -95,11 +116,11 @@ public class GerenciarDiariaAvulsaMB {
 
 	public void selectListener(){
 		setRendered(getTipo().contains("PJ"));
-		System.out.println("Tipo: "+tipo+", rendered: "+rendered);
 	}
 	
 	public String limpa() {
 		diariaAvulsa = new DiariaAvulsa();
+		tipo = "PJ";
 		return "/public/diaria-avulsa.jsf?facesRedirect=true";
 	}
 
@@ -119,9 +140,25 @@ public class GerenciarDiariaAvulsaMB {
 		this.rendered = rendered;
 	}
 	
+	public PessoaFisica getPf() {
+		return pf;
+	}
+
+	public void setPf(PessoaFisica pf) {
+		this.pf = pf;
+	}
+
+	public PessoaJuridica getPj() {
+		return pj;
+	}
+
+	public void setPj(PessoaJuridica pj) {
+		this.pj = pj;
+	}
+
 	//MOCK
 	public List<PessoaFisica> getPessoasFisicas(){
-		return pfDAO.lista();
+		return pessoasFisicas;
 	}
 	
 	public void setPessoasFisicas(List<PessoaFisica> pessoasFisicas){

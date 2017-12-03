@@ -15,5 +15,5 @@ public class GerenciarPessoaJuridicaService {
 	
 	public List<PessoaJuridica> lista() {
 		return pfDAO.lista();
-	}	
+	}
 }

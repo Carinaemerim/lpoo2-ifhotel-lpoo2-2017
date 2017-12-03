@@ -5,6 +5,7 @@ import java.util.Collection;
 import java.util.Date;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
 
 @Entity
 @Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
@@ -12,17 +13,17 @@ public abstract class Diaria extends BaseEntity<Long> implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private Date data;
-	@ManyToOne(cascade=CascadeType.MERGE)
+	@ManyToOne
 	@JoinColumn(name="quarto_id")
 	private Quarto quarto;
 	@ManyToMany(cascade=CascadeType.MERGE)
 	private Collection<PessoaFisica> hospedes;
-
-	
+	@Min(value=1)
 	private int qntdDias;
 
 	public Diaria() {
 		quarto = new Quarto();
+		data = new Date();
 	}
 
 	public Diaria(Date data) {

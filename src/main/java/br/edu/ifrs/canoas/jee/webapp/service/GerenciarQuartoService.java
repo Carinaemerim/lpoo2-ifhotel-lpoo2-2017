@@ -10,7 +10,6 @@ import javax.inject.Inject;
 import br.edu.ifrs.canoas.jee.webapp.model.TipoDeQuarto;
 import br.edu.ifrs.canoas.jee.webapp.model.dao.QuartoDAO;
 import br.edu.ifrs.canoas.jee.webapp.model.entity.Quarto;
-import br.edu.ifrs.canoas.jee.webapp.model.entity.Usuario;
 import br.edu.ifrs.canoas.jee.webapp.util.Mensagens;
 
 @Stateless
@@ -36,6 +35,10 @@ public class GerenciarQuartoService {
 			return quartoDAO.buscaPorTipo(tipo);
 		else
 			return quartoDAO.lista();
+	}
+	
+	public List<Quarto> buscaDisponiveis(){
+		return quartoDAO.buscaQuartosDisponiveis();
 	}
 	
 	public boolean salva(Quarto quarto){
