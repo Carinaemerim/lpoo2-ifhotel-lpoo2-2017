@@ -23,7 +23,7 @@ public class GerenciarPessoaFisicaService {
 	@Inject
 	private Logger log;
 
-	public boolean salvaUsario(PessoaFisica pf) {
+	public boolean salvaPF(PessoaFisica pf) {
 
 		log.info("Salvando " + pf.getNome());
 		
