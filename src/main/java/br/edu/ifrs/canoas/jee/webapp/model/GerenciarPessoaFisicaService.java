@@ -29,7 +29,7 @@ public class GerenciarPessoaFisicaService {
 		
 		if (pf.getId() != null) {
 			pfDAO.atualiza(pf);
-			Mensagens.define(FacesMessage.SEVERITY_INFO, "Usuario.atualizado.sucesso",pf.getEmail());
+			Mensagens.define(FacesMessage.SEVERITY_INFO, "PessoaFisica.atualizado.sucesso",pf.getEmail());
 			return true;
 		}
 		
@@ -38,13 +38,13 @@ public class GerenciarPessoaFisicaService {
 		if (qtdEmailCadastrado == 0) {
 				
 				pfDAO.insere(pf);
-				Mensagens.define(FacesMessage.SEVERITY_INFO, "Usuario.cadastro.sucesso",pf.getEmail());
+				Mensagens.define(FacesMessage.SEVERITY_INFO, "PessoaFisica.cadastro.sucesso",pf.getEmail());
 				log.info("Salvo " + pf.getNome() + " com id " + pf.getId());
 				return true;
 		} 
 		
 		log.info("Problema com email duplicado do usuário " + pf.getNome() + " - email " + pf.getEmail());
-		Mensagens.define(FacesMessage.SEVERITY_ERROR, "Usuario.email.erro.cadastrado",pf.getEmail());
+		Mensagens.define(FacesMessage.SEVERITY_ERROR, "PessoaFisica.email.erro.cadastrado",pf.getEmail());
 		return false;
 	}
 
@@ -69,24 +69,11 @@ public class GerenciarPessoaFisicaService {
 		else
 			return pfDAO.lista();
 	}
-	
-	private String getSenha(String str) {
-		String result = "";
-		try {
-			MessageDigest m = MessageDigest.getInstance("MD5");
-			m.update(str.getBytes(), 0, str.length());
-			result = new BigInteger(1, m.digest()).toString(16);
-		} catch (NoSuchAlgorithmException e) {
-			e.printStackTrace();
-			Mensagens.define(FacesMessage.SEVERITY_INFO, "Usuario.senha.erro.criptografia", e.getMessage());
-		}
-		return result;
-	}
 
 
 	public void exclui(PessoaFisica pf) {
 		pfDAO.exclui(pf.getId());
-		Mensagens.define(FacesMessage.SEVERITY_INFO, "Usuario.excluido.sucesso",pf.getNome());
+		Mensagens.define(FacesMessage.SEVERITY_INFO, "PessoaFisica.excluido.sucesso",pf.getNome());
 		log.info("Excluido " + pf.getNome() + " com id " + pf.getId());
 	}
 
