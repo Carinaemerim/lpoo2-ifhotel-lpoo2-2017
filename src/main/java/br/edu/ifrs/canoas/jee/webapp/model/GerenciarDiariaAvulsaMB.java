@@ -7,12 +7,12 @@ import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import br.edu.ifrs.canoas.jee.webapp.model.dao.PessoaFisicaDAO;
 import br.edu.ifrs.canoas.jee.webapp.model.entity.DiariaAvulsa;
 import br.edu.ifrs.canoas.jee.webapp.model.entity.PessoaFisica;
 import br.edu.ifrs.canoas.jee.webapp.model.entity.PessoaJuridica;
 import br.edu.ifrs.canoas.jee.webapp.model.entity.Quarto;
 import br.edu.ifrs.canoas.jee.webapp.service.GerenciarDiariaAvulsaService;
+import br.edu.ifrs.canoas.jee.webapp.service.GerenciarPessoaFisicaService;
 import br.edu.ifrs.canoas.jee.webapp.service.GerenciarPessoaJuridicaService;
 import br.edu.ifrs.canoas.jee.webapp.service.GerenciarQuartoService;
 
@@ -26,7 +26,7 @@ public class GerenciarDiariaAvulsaMB {
 	@Inject
 	private GerenciarPessoaJuridicaService gerenciarPJService;
 	@Inject
-	private PessoaFisicaDAO pfDAO;
+	private GerenciarPessoaFisicaService gerenciarPFService;
 	@Inject
 	private DiariaAvulsa diariaAvulsa;
 	@Inject
@@ -60,8 +60,7 @@ public class GerenciarDiariaAvulsaMB {
 		diariasAvulsas = gerenciarDiariaAvulsaService.busca();	
 		quartos = gerenciarQuartoService.buscaDisponiveis();
 		pessoasJuridicas = gerenciarPJService.lista();
-		//"mockado" enquanto o GerenciarPfService não for finalizado pelo Dilan
-		pessoasFisicas = pfDAO.lista();
+		pessoasFisicas = gerenciarPFService.busca(null);
 		selectListener();
     }
 	
@@ -156,7 +155,6 @@ public class GerenciarDiariaAvulsaMB {
 		this.pj = pj;
 	}
 
-	//MOCK
 	public List<PessoaFisica> getPessoasFisicas(){
 		return pessoasFisicas;
 	}

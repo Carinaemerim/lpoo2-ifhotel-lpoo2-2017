@@ -116,7 +116,9 @@
 								<h:outputText rendered="#{_diaria.cliente.class.simpleName == 'PessoaFisica'}" value="#{_diaria.cliente.cpf}"/>
 							</p:column>
 							<p:column headerText="#{messages['diaria.table.entrydate']}">
-								<h:outputText value="#{_diaria.data}" />
+								<h:outputText value="#{_diaria.data}">
+									<f:convertDateTime pattern="dd/MM/yyyy"/>
+								</h:outputText>
 							</p:column>
 							<p:column headerText="#{messages['diaria.table.nbrdays']}">
 								<h:outputText value="#{_diaria.qntdDias}" />
