@@ -1,6 +1,7 @@
 package br.edu.ifrs.canoas.jee.webapp.model.entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 
@@ -24,6 +25,7 @@ public abstract class Diaria extends BaseEntity<Long> implements Serializable {
 	public Diaria() {
 		quarto = new Quarto();
 		data = new Date();
+		hospedes = new ArrayList<>();
 	}
 
 	public Diaria(Date data) {
