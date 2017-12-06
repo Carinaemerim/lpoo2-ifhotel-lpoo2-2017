@@ -9,7 +9,6 @@ import javax.inject.Inject;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
-import org.jboss.arquillian.test.spi.ArquillianProxyException;
 import org.jboss.shrinkwrap.api.Archive;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.asset.EmptyAsset;
@@ -20,7 +19,6 @@ import org.junit.runner.RunWith;
 import br.edu.ifrs.canoas.jee.webapp.model.TipoDeQuarto;
 import br.edu.ifrs.canoas.jee.webapp.model.dao.QuartoDAO;
 import br.edu.ifrs.canoas.jee.webapp.model.entity.Quarto;
-import br.edu.ifrs.canoas.jee.webapp.model.entity.Usuario;
 import br.edu.ifrs.canoas.jee.webapp.util.Mensagens;
 
 @RunWith(Arquillian.class)
@@ -35,7 +33,7 @@ public class GerenciarQuartoServiceTest {
 	@Deployment
     public static Archive<?> createTestArchive() {
 	    return ShrinkWrap.create(WebArchive.class, "test.war")
-                .addClasses(GerenciarQuartoService.class, QuartoDAO.class, org.apache.commons.lang3.StringUtils.class, Mensagens.class)
+                .addClasses(GerenciarQuartoService.class, QuartoDAO.class, Mensagens.class)
                 .addPackages(true, "br.edu.ifrs.canoas.jee.webapp")
                 .addAsResource("META-INF/test-persistence.xml", "META-INF/persistence.xml")
                 .addAsWebInfResource(new File("src/main/webapp", "WEB-INF/faces-config.xml"))

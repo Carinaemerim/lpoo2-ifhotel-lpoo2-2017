@@ -63,7 +63,7 @@
 
 						<h:panelGroup layout="block" class="form-group" id="cnpjwrapper" >
 							<p:outputLabel for="cnpj" value="#{messages['diaria.form.cnpj.label']}" rendered="#{gerenciarReservaMB.rendered}" />
-							<p:selectOneMenu required = "false" id="cnpj" style="width: 100%" rendered="#{gerenciarReservaMB.rendered}" value = "#{gerenciarReservaMB.reserva.empresa.id}" filter="true" filterMatchMode="startsWith">
+							<p:selectOneMenu required = "true" id="cnpj" style="width: 100%" rendered="#{gerenciarReservaMB.rendered}" value = "#{gerenciarReservaMB.reserva.empresa.id}" filter="true" filterMatchMode="startsWith">
 				                <f:selectItem itemLabel="#{messages['diaria.form.cnpj.hint']}" itemValue="" noSelectionOption="true" />	
 				                 <f:selectItems value = "#{gerenciarReservaMB.pj}" var="PessoaPj" itemLabel = "#{PessoaPj.cnpj}" itemValue = "#{PessoaPj.id}"/>			                
 				                
@@ -72,7 +72,7 @@
 
 						<div class="form-group">
 							<p:outputLabel for="cpf" value="#{messages['diaria.form.cpf.label']}"/>
-							<p:selectOneMenu id="cpf" required="false" style="width: 100%"  value = "#{gerenciarReservaMB.reserva.cliente.id}" filter="true" filterMatchMode="startsWith">
+							<p:selectOneMenu id="cpf" required="true" style="width: 100%"  value = "#{gerenciarReservaMB.reserva.cliente.id}" filter="true" filterMatchMode="startsWith">
 				                <f:selectItem itemLabel="#{messages['diaria.form.cpf.hint']}" itemValue="" noSelectionOption="true" />
 				                <f:selectItems value = "#{gerenciarReservaMB.pf}" var="PessoaF" itemLabel = "#{PessoaF.cpf}" itemValue = "#{PessoaF.id}"/>
 				            </p:selectOneMenu>
@@ -80,7 +80,7 @@
 
 						<div class="form-group">
 							<p:outputLabel for="quarto" value="#{messages['diaria.form.quarto.label']}"/>
-							<p:selectOneMenu id="quarto" required="false" style="width: 100%" value = "#{gerenciarReservaMB.reserva.diariaReservada.quarto.id}" filter="true" filterMatchMode="startsWith" >
+							<p:selectOneMenu id="quarto" required="true" style="width: 100%" value = "#{gerenciarReservaMB.reserva.diariaReservada.quarto.id}" filter="true" filterMatchMode="startsWith" >
 				                <f:selectItem itemLabel="#{messages['diaria.form.quarto.hint']}" itemValue="" noSelectionOption="true" />
 				                <f:selectItems value="#{gerenciarReservaMB.quartos}" var="quarto" itemLabel="#{quarto.numero}" itemValue = "#{quarto.id}"/>
 				            </p:selectOneMenu>
@@ -88,7 +88,7 @@
 						
 						<div class="form-group">
 							<p:outputLabel for="qtd" value="#{messages['diaria.form.qtd.label']}" />
-							<p:inputText id="qtd" styleClass="form-control" required="false" value = "#{gerenciarReservaMB.reserva.diariaReservada.qntdDias}" />
+							<p:inputText id="qtd" styleClass="form-control" required="true" value = "#{gerenciarReservaMB.reserva.diariaReservada.qntdDias}" />
 							<!-- <p:message for="nome" /> -->
 						</div>
 						
@@ -99,7 +99,7 @@
 					    <h:panelGrid columns="2" cellpadding="5">
 					         
 					        <p:outputLabel for="button" value="#{messages['reserva.form.data.label']}" />
-					        <p:calendar required = "false" id="button" value="#{gerenciarReservaMB.reserva.data}" showOn="button" pattern = "dd/MM/yyyy"/>
+					        <p:calendar required = "true" id="button" value="#{gerenciarReservaMB.reserva.data}" showOn="button" pattern = "dd/MM/yyyy"/>
 					    
 					    </h:panelGrid>
 					  
@@ -129,7 +129,10 @@
 						</h:panelGroup>
 						
 						<p:dataTable var="_res" value="#{gerenciarReservaMB.reservas}" id="tb-usuarios"
-						 rendered="#{not empty gerenciarReservaMB.reservas}">
+						 	rendered="#{not empty gerenciarReservaMB.reservas}" 
+						 	paginator="true"
+                            paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                            rows="10">
 							
 							<p:column headerText="#{messages['reserva.label.quarto']}">
 								<h:outputText value="#{_res.numeroQuarto}" />
@@ -139,7 +142,9 @@
 								<h:outputText value="#{_res.cliente.cpf}" />
 							</p:column>
 							<p:column headerText="#{messages['reserva.table.reservedate']}">
-								<h:outputText value="#{_res.data}" />
+								<h:outputText value="#{_res.data}">
+								<f:convertDateTime pattern="MM/dd/yyyy" />
+								</h:outputText>
 							</p:column>
 							<p:column headerText="#{messages['diaria.table.nbrdays']}">
 								<h:outputText value="#{_res.diariaReservada.qntdDias}" />
