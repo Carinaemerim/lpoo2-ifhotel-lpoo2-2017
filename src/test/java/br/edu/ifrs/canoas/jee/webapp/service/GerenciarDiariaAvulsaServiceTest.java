@@ -129,12 +129,10 @@ public class GerenciarDiariaAvulsaServiceTest {
 		
 		gerenciarDiariaAvulsaService.salvaDiaria(d);
 		
-		List<DiariaAvulsa> diarias = gerenciarDiariaAvulsaService.busca();
-		
+		List<DiariaAvulsa> diarias = gerenciarDiariaAvulsaService.busca();		
 		assertTrue(diarias.contains(d));
 		
-		DiariaAvulsa busca = gerenciarDiariaAvulsaService.get(d.getId());
-		
+		DiariaAvulsa busca = gerenciarDiariaAvulsaService.get(d.getId());		
 		assertEquals(d, busca);
 	}
 	
