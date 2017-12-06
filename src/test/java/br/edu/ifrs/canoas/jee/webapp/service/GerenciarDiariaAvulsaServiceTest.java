@@ -66,6 +66,7 @@ public class GerenciarDiariaAvulsaServiceTest {
 		diarias = gerenciarDiariaAvulsaService.busca();
 		
 		assertNotNull(d.getId());
+		
 		assertTrue(diarias.contains(d));
 	}
 	

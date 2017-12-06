@@ -77,7 +77,7 @@ public class DiariaAvulsaDAOTest {
 		List<DiariaAvulsa> diarias = daDAO.lista();		
 		assertTrue(diarias.size() >= 2);
 		
-		diarias = daDAO.buscaFiltrada();		
+		diarias = daDAO.buscaFiltrada();
 		assertTrue(diarias.size() == 2);
 	}
 	
